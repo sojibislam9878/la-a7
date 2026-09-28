@@ -49,3 +49,11 @@ export const registerSchema = z
   })
 
 export type RegisterFormValues = z.infer<typeof registerSchema>
+
+export const loginSchema = z.object({
+  email: emailSchema,
+  // Login only checks presence; strength rules apply at signup
+  password: z.string().min(1, { error: "Password is required" }),
+})
+
+export type LoginFormValues = z.infer<typeof loginSchema>
