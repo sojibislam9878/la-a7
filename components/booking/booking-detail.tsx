@@ -20,6 +20,7 @@ import { BookingTimeline } from "@/components/booking/booking-timeline"
 import { HoldCountdown } from "@/components/booking/hold-countdown"
 import { StatusBadge } from "@/components/booking/status-badge"
 import { DashboardSkeleton } from "@/components/dashboard/dashboard-skeleton"
+import { PayButton } from "@/components/payment/pay-button"
 import { EmptyState } from "@/components/shared/empty-state"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -127,9 +128,12 @@ function BookingDetailView({ id }: { id: string }) {
           {meta.farmerHint}
         </p>
         {awaitingPayment && data.holdExpiresAt && (
-          <p className="flex items-center gap-2 text-sm">
-            Hold ends in <HoldCountdown expiresAt={data.holdExpiresAt} />
-          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="flex items-center gap-2 text-sm">
+              Hold ends in <HoldCountdown expiresAt={data.holdExpiresAt} />
+            </p>
+            <PayButton bookingId={data.id} amount={data.estimatedCost} />
+          </div>
         )}
       </div>
 
