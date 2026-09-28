@@ -34,10 +34,15 @@ export const authApi = {
   login: (payload: LoginPayload) =>
     apiRequest<AuthSession>("/auth/login", { method: "POST", body: payload }),
 
-  /** Uses the refresh cookie; rotates it and returns a fresh access token */
-  refresh: () => apiRequest<AuthSession>("/auth/refresh-token", { method: "POST", body: {} }),
+  /**
+   * Uses the refresh cookie; rotates it and returns a fresh access token.
+   * `keepalive`: the backend revokes the old token as soon as it rotates, so if
+   * the page reloads mid-request the browser must still store the new cookie.
+   */
+  refresh: () =>
+    apiRequest<AuthSession>("/auth/refresh-token", { method: "POST", body: {}, keepalive: true }),
 
-  logout: () => apiRequest<null>("/auth/logout", { method: "POST", body: {} }),
+  logout: () => apiRequest<null>("/auth/logout", { method: "POST", body: {}, keepalive: true }),
 
   /** Full-page redirect target; Google accounts are always created as FARMER */
   googleUrl: `${env.apiBaseUrl}/auth/google`,

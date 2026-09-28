@@ -19,3 +19,7 @@ export function clearRoleCookie() {
 export function hasRoleCookie() {
   return document.cookie.split("; ").some((part) => part.startsWith(`${ROLE_COOKIE}=`))
 }
+
+export function parseRole(value: string | undefined | null): Role | null {
+  return value === "FARMER" || value === "WAREHOUSE_OWNER" || value === "ADMIN" ? value : null
+}

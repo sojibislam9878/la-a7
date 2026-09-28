@@ -13,11 +13,13 @@ export class ApiError extends Error {
   }
 }
 
-type RequestOptions = {
+export type RequestOptions = {
   method?: "GET" | "POST" | "PATCH" | "PUT" | "DELETE"
   body?: unknown
   token?: string | null
   signal?: AbortSignal
+  /** Let the request finish (and its Set-Cookie apply) even if the page unloads */
+  keepalive?: boolean
 }
 
 export type ApiResult<T> = {
@@ -32,7 +34,7 @@ export type ApiResult<T> = {
  * Token refresh on 401 is layered on top in task 1.1.
  */
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<ApiResult<T>> {
-  const { method = "GET", body, token, signal } = options
+  const { method = "GET", body, token, signal, keepalive } = options
 
   const headers: Record<string, string> = { Accept: "application/json" }
   if (body !== undefined) headers["Content-Type"] = "application/json"
@@ -46,6 +48,7 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
       body: body === undefined ? undefined : JSON.stringify(body),
       credentials: "include",
       signal,
+      keepalive,
     })
   } catch (error) {
     if (error instanceof DOMException && error.name === "AbortError") throw error
