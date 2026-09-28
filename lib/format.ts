@@ -4,8 +4,12 @@ export function formatNumber(value: number) {
   return numberFormat.format(value)
 }
 
-export function formatMoney(value: number, { maximumFractionDigits = 2 } = {}) {
-  return `$${value.toLocaleString("en-US", { maximumFractionDigits })}`
+export function formatMoney(value: number, { maximumFractionDigits }: { maximumFractionDigits?: number } = {}) {
+  if (maximumFractionDigits !== undefined) {
+    return `$${value.toLocaleString("en-US", { maximumFractionDigits })}`
+  }
+  const digits = Number.isInteger(value) ? 0 : 2
+  return `$${value.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits })}`
 }
 
 export function formatKg(kg: number) {
