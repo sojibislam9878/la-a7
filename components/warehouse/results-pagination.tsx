@@ -7,7 +7,6 @@ import { warehouseSearchHref } from "@/lib/warehouse-query"
 import type { PaginationMeta } from "@/types/api"
 import type { WarehouseQuery } from "@/types/warehouse"
 
-/** Page numbers with ellipses: 1 … 4 5 6 … 12 */
 function pageWindow(current: number, total: number): (number | "gap")[] {
   const pages = new Set([1, total, current - 1, current, current + 1])
   const sorted = [...pages].filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)

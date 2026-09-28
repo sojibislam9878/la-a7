@@ -1,15 +1,11 @@
 import Link from "next/link"
 import { XIcon } from "lucide-react"
 
-import { formatBdt, formatKg } from "@/lib/format"
+import { formatMoney, formatKg } from "@/lib/format"
 import { warehouseSearchHref } from "@/lib/warehouse-query"
 import type { CropType } from "@/types/crop-type"
 import type { WarehouseQuery } from "@/types/warehouse"
 
-/**
- * Server-rendered chips: each is a plain link to the same search without that
- * filter, so removing one works without any client JavaScript.
- */
 export function ActiveFilters({ query, cropTypes }: { query: WarehouseQuery; cropTypes: CropType[] }) {
   const chips: { key: string; label: string; href: string }[] = []
   const without = (...keys: (keyof WarehouseQuery)[]) => {
@@ -28,8 +24,8 @@ export function ActiveFilters({ query, cropTypes }: { query: WarehouseQuery; cro
     chips.push({ key: "capacity", label: `${formatKg(query.minCapacityKg)}+ chamber`, href: without("minCapacityKg") })
   }
   if (query.minRate !== undefined || query.maxRate !== undefined) {
-    const min = query.minRate !== undefined ? formatBdt(query.minRate, { maximumFractionDigits: 3 }) : "any"
-    const max = query.maxRate !== undefined ? formatBdt(query.maxRate, { maximumFractionDigits: 3 }) : "any"
+    const min = query.minRate !== undefined ? formatMoney(query.minRate, { maximumFractionDigits: 3 }) : "any"
+    const max = query.maxRate !== undefined ? formatMoney(query.maxRate, { maximumFractionDigits: 3 }) : "any"
     chips.push({ key: "rate", label: `${min} to ${max} /kg/day`, href: without("minRate", "maxRate") })
   }
   if (query.minRating) chips.push({ key: "rating", label: `${query.minRating}+ stars`, href: without("minRating") })

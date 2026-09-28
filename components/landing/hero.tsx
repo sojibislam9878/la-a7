@@ -13,7 +13,6 @@ type HeroStats = {
 export function Hero({ cropTypes, stats }: { cropTypes: CropType[]; stats: HeroStats }) {
   return (
     <section className="relative overflow-hidden">
-      {/* Soft background glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-40 -z-10 mx-auto h-[36rem] max-w-5xl rounded-full bg-primary/15 blur-3xl"
@@ -72,7 +71,6 @@ const LOAD_BARS = [
   { day: "Mar 28", pct: 40 },
 ]
 
-/** Decorative illustration of the peak-load capacity model; hidden from assistive tech */
 function CapacityPreview() {
   return (
     <div aria-hidden className="relative mx-auto w-full max-w-md lg:max-w-none">
@@ -111,7 +109,7 @@ function CapacityPreview() {
         <div className="mt-6 grid grid-cols-2 gap-3">
           <div className="rounded-xl border bg-background p-3">
             <p className="text-xs text-muted-foreground">Potato · 2,500 kg</p>
-            <p className="mt-1 font-semibold">৳3,500 est.</p>
+            <p className="mt-1 font-semibold">$3,500 est.</p>
           </div>
           <div className="rounded-xl border bg-background p-3">
             <p className="text-xs text-muted-foreground">Status</p>

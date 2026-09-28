@@ -4,9 +4,8 @@ export function formatNumber(value: number) {
   return numberFormat.format(value)
 }
 
-/** Storage rent is priced in BDT on the backend */
-export function formatBdt(value: number, { maximumFractionDigits = 2 } = {}) {
-  return `৳${value.toLocaleString("en-US", { maximumFractionDigits })}`
+export function formatMoney(value: number, { maximumFractionDigits = 2 } = {}) {
+  return `$${value.toLocaleString("en-US", { maximumFractionDigits })}`
 }
 
 export function formatKg(kg: number) {
@@ -18,4 +17,13 @@ export function formatKg(kg: number) {
 
 export function formatTempRange(min: number, max: number) {
   return min === max ? `${min}°C` : `${min}°C to ${max}°C`
+}
+
+export function initials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("")
 }

@@ -82,7 +82,6 @@ export function VerifyOtpForm({ defaultEmail, codeNotSent }: { defaultEmail: str
           switch (error.status) {
             case 400:
               if (applyServerFieldErrors(error, setError, ["email", "otp"])) return
-              // "Incorrect code. N attempt(s) remaining."
               setError("otp", { type: "server", message: error.message })
               setFocus("otp")
               return

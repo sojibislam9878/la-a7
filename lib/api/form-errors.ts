@@ -2,11 +2,6 @@ import type { FieldValues, Path, UseFormSetError } from "react-hook-form"
 
 import { ApiError } from "@/lib/api/client"
 
-/**
- * Copies backend field errors (`errors[].path`) onto matching form fields.
- * Returns true when at least one field error was applied, so callers can skip
- * the generic toast.
- */
 export function applyServerFieldErrors<T extends FieldValues>(
   error: unknown,
   setError: UseFormSetError<T>,

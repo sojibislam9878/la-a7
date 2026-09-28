@@ -32,7 +32,6 @@ export function useLogin() {
     mutationKey: ["auth", "login"],
     mutationFn: (payload: LoginPayload) => authApi.login(payload),
     onSuccess: ({ data }) => {
-      // Drop anything cached for a previous user before switching accounts
       queryClient.clear()
       setSession(data)
     },

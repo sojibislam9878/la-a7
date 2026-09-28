@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils"
 
-/** Decorative leaf sprig; inherits color from `currentColor` */
 export function Leaf({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" className={cn("size-12", className)} aria-hidden focusable="false">

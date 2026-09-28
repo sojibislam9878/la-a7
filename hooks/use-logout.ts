@@ -12,9 +12,7 @@ export function useLogout() {
 
   return useMutation({
     mutationKey: ["auth", "logout"],
-    // Revokes the refresh + access token pair (shared jti) on the backend
     mutationFn: () => authApi.logout(),
-    // Log out locally even if the request fails (offline, already expired)
     onSettled: () => {
       clearSession()
       queryClient.clear()

@@ -3,7 +3,6 @@ import { CheckIcon, XIcon } from "lucide-react"
 import { PASSWORD_RULES } from "@/schemas/auth"
 import { cn } from "@/lib/utils"
 
-/** Live checklist of the backend password rules */
 export function PasswordChecklist({ value, id }: { value: string; id?: string }) {
   return (
     <ul id={id} className="grid gap-1 text-xs sm:grid-cols-3" aria-label="Password requirements">

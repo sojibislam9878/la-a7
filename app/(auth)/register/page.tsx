@@ -13,8 +13,6 @@ function parseRole(value: string | string[] | undefined): SelfServiceRole {
   return value === "WAREHOUSE_OWNER" ? "WAREHOUSE_OWNER" : "FARMER"
 }
 
-// Server Component shell: reads `?role=` (from "List your warehouse" links) and
-// hands it to the interactive client form.
 export default async function RegisterPage({
   searchParams,
 }: {

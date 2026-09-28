@@ -5,7 +5,6 @@ import { HomeIcon, RotateCwIcon, TriangleAlertIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
-/** Shared body for `error.tsx` boundaries */
 export function ErrorState({
   error,
   reset,

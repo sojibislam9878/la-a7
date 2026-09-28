@@ -13,7 +13,6 @@ import type { WarehouseQuery } from "@/types/warehouse"
 
 const gridClass = "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
 
-/** Async Server Component: fetched on the server, streamed behind Suspense */
 export async function WarehouseResults({ query }: { query: WarehouseQuery }) {
   const result = await getPublicWarehouses({ ...query, limit: WAREHOUSE_PAGE_SIZE }).catch((error: unknown) =>
     error instanceof Error ? error : new Error("Could not load warehouses")

@@ -1,7 +1,5 @@
 import { z } from "zod"
 
-// Mirrors backend/src/modules/auth/auth.validation.ts so users see the same rules
-// before the request is sent.
 export const BANGLADESHI_PHONE = /^(?:\+?880|0)1[3-9]\d{8}$/
 
 export const PASSWORD_RULES = [
@@ -33,7 +31,6 @@ export const registerSchema = z
       .min(2, { error: "Name must be at least 2 characters" })
       .max(80, { error: "Name must be at most 80 characters" }),
     email: emailSchema,
-    // Optional: an empty input is allowed and is not sent to the API
     phone: z
       .string()
       .trim()
@@ -52,7 +49,6 @@ export type RegisterFormValues = z.infer<typeof registerSchema>
 
 export const loginSchema = z.object({
   email: emailSchema,
-  // Login only checks presence; strength rules apply at signup
   password: z.string().min(1, { error: "Password is required" }),
 })
 

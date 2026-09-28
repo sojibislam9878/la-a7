@@ -9,12 +9,10 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { ROLE_HOME } from "@/constants/routes"
 import { useAuthStore } from "@/stores/auth-store"
 
-/** Public navbar actions: guest buttons, or dashboard link + account menu */
 export function NavAuthActions() {
   const status = useAuthStore((state) => state.status)
   const user = useAuthStore((state) => state.user)
 
-  // Session is still being restored (also the server-rendered state)
   if (status === "loading") {
     return <Skeleton className="hidden h-8 w-40 rounded-lg sm:block" aria-hidden />
   }

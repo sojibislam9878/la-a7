@@ -3,7 +3,7 @@ import { BoxesIcon, CalendarClockIcon, DoorOpenIcon, type LucideIcon, MapPinIcon
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { formatBdt, formatKg } from "@/lib/format"
+import { formatMoney, formatKg } from "@/lib/format"
 import type { Warehouse } from "@/types/warehouse"
 
 export function WarehouseCard({ warehouse }: { warehouse: Warehouse }) {
@@ -17,7 +17,6 @@ export function WarehouseCard({ warehouse }: { warehouse: Warehouse }) {
           <Rating avg={warehouse.avgRating} count={warehouse.reviewCount} />
         </div>
         <CardTitle className="text-lg">
-          {/* Stretched link makes the whole card clickable while keeping one tab stop */}
           <Link
             href={`/warehouses/${warehouse.id}`}
             className="after:absolute after:inset-0 after:rounded-[inherit] focus-visible:outline-none"
@@ -47,7 +46,7 @@ export function WarehouseCard({ warehouse }: { warehouse: Warehouse }) {
 
       <CardFooter className="mt-auto justify-between border-t">
         <p>
-          <span className="text-xl font-bold">{formatBdt(warehouse.ratePerKgPerDay, { maximumFractionDigits: 3 })}</span>
+          <span className="text-xl font-bold">{formatMoney(warehouse.ratePerKgPerDay, { maximumFractionDigits: 3 })}</span>
           <span className="text-sm text-muted-foreground"> /kg/day</span>
         </p>
         <span className="text-sm font-medium text-primary group-hover:underline">View details</span>

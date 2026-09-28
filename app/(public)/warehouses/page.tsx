@@ -23,11 +23,6 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   }
 }
 
-/**
- * Server Component: the URL is parsed and validated here, results are fetched
- * on the server (ISR-cached per query) and streamed in. Only the filter
- * controls are Client Components, and they just rewrite the URL.
- */
 export default async function WarehousesPage({ searchParams }: PageProps) {
   const query = parseWarehouseQuery(await searchParams)
   const cropTypes = await getCropTypes().catch(() => [])
@@ -67,7 +62,6 @@ export default async function WarehousesPage({ searchParams }: PageProps) {
 
           <ActiveFilters query={query} cropTypes={cropTypes} />
 
-          {/* New key per query: shows the skeleton while a new result set streams in */}
           <Suspense key={serializeWarehouseQuery(query)} fallback={<WarehouseResultsSkeleton />}>
             <WarehouseResults query={query} />
           </Suspense>

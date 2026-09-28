@@ -74,7 +74,6 @@ export function RegisterForm({ defaultRole }: { defaultRole: SelfServiceRole }) 
         email,
         password: values.password,
         role: values.role,
-        // Backend rejects unknown keys and empty phones, so only send it when filled
         ...(values.phone ? { phone: values.phone } : {}),
       },
       {
@@ -86,8 +85,6 @@ export function RegisterForm({ defaultRole }: { defaultRole: SelfServiceRole }) 
           router.push(verifyOtpUrl(email))
         },
         onError: (error) => {
-          // The account is created before the email is sent, so a mail failure
-          // still leaves a valid (unverified) account: continue to verification.
           if (error instanceof ApiError && error.status === 502) {
             toast.warning("Account created, but the code could not be sent", {
               description: "Request a new code on the next page.",

@@ -8,7 +8,6 @@ export function Logo({
   variant = "default",
 }: {
   className?: string
-  /** `light` for use on the dark forest brand surfaces */
   variant?: "default" | "light"
 }) {
   const light = variant === "light"

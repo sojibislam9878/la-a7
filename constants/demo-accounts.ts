@@ -7,7 +7,6 @@ export type DemoAccount = {
   description: string
 }
 
-/** Seeded, pre-verified accounts from backend/prisma/seed.ts, for evaluation */
 export const DEMO_ACCOUNTS: DemoAccount[] = [
   {
     role: "FARMER",

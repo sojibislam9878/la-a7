@@ -2,7 +2,6 @@ import { z } from "zod"
 
 import type { WarehouseQuery, WarehouseSortBy } from "@/types/warehouse"
 
-/** Results per page on the search page (3 × 3 grid) */
 export const WAREHOUSE_PAGE_SIZE = 9
 
 export const SORT_OPTIONS: { value: string; label: string; sortBy: WarehouseSortBy; sortOrder: "asc" | "desc" }[] = [
@@ -28,8 +27,6 @@ export const RATING_OPTIONS = [
   { value: "4.5", label: "4.5+ stars" },
 ]
 
-// Each field falls back to "not set" instead of failing, so a hand-edited or
-// stale URL degrades to fewer filters rather than a backend 400.
 const optional = <T extends z.ZodType>(schema: T) => schema.optional().catch(undefined)
 
 const urlQuerySchema = z.object({
@@ -62,7 +59,6 @@ function toRecord(params: RawParams) {
   return record
 }
 
-/** URL search params → validated backend query (without paging size) */
 export function parseWarehouseQuery(params: RawParams): WarehouseQuery {
   const query: WarehouseQuery = urlQuerySchema.parse(toRecord(params))
   if (query.minRate !== undefined && query.maxRate !== undefined && query.maxRate < query.minRate) {
@@ -71,7 +67,6 @@ export function parseWarehouseQuery(params: RawParams): WarehouseQuery {
   return query
 }
 
-/** Backend query → URL search string (defaults omitted to keep URLs short) */
 export function serializeWarehouseQuery(query: WarehouseQuery) {
   const params = new URLSearchParams()
   const sort = query.sortBy && query.sortOrder ? `${query.sortBy}:${query.sortOrder}` : undefined
@@ -91,7 +86,6 @@ export function warehouseSearchHref(query: WarehouseQuery) {
   return qs ? `/warehouses?${qs}` : "/warehouses"
 }
 
-/** Number of active filters (search and sort excluded) */
 export function countActiveFilters(query: WarehouseQuery) {
   return (["district", "cropTypeId", "minCapacityKg", "minRate", "maxRate", "minRating"] as const).filter(
     (key) => query[key] !== undefined

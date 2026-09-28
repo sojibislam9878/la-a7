@@ -14,8 +14,6 @@ import { Hero } from "@/components/landing/hero"
 import { HowItWorks } from "@/components/landing/how-it-works"
 import { getCropTypes, getPublicWarehouses } from "@/lib/api/public-data"
 
-// Server Component: public data is fetched on the server and cached with ISR
-// (see lib/api/public-data.ts), so the page ships as static HTML.
 export default async function HomePage() {
   const [cropTypes, warehouseTotal] = await Promise.all([
     getCropTypes().catch(() => []),

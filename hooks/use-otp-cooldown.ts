@@ -1,6 +1,5 @@
 import { useReducer, useSyncExternalStore } from "react"
 
-/** Backend allows one OTP request per 60 s per email */
 export const OTP_COOLDOWN_SECONDS = 60
 
 const storageKey = (email: string) => `agrostore:otp-sent:${email.toLowerCase()}`
@@ -14,12 +13,11 @@ function readSentAt(email: string) {
   }
 }
 
-/** Records when a code was sent, so the cooldown survives navigation and reloads */
 export function markOtpSent(email: string, at = Date.now()) {
   try {
     sessionStorage.setItem(storageKey(email), String(at))
   } catch {
-    // Storage unavailable (private mode): the backend still enforces the limit
+    return
   }
 }
 
@@ -30,7 +28,6 @@ const subscribeClock = (tick: () => void) => {
 const subscribeNever = () => () => {}
 
 export function useOtpCooldown(email: string | null) {
-  // Whole seconds, so the snapshot only changes once per tick; 0 during SSR
   const nowSec = useSyncExternalStore(subscribeClock, () => Math.floor(Date.now() / 1000), () => 0)
   const sentAt = useSyncExternalStore(
     subscribeNever,
@@ -42,7 +39,6 @@ export function useOtpCooldown(email: string | null) {
   const secondsLeft =
     sentAt && nowSec ? Math.max(0, Math.ceil(sentAt / 1000 + OTP_COOLDOWN_SECONDS - nowSec)) : 0
 
-  /** Start (or align to the server's) cooldown of `seconds` from now */
   function start(seconds = OTP_COOLDOWN_SECONDS) {
     if (!email) return
     markOtpSent(email, Date.now() - (OTP_COOLDOWN_SECONDS - seconds) * 1000)

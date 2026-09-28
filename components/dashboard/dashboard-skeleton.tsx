@@ -1,6 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-/** Placeholder for dashboard pages while the session or data loads */
 export function DashboardSkeleton() {
   return (
     <div className="flex flex-col gap-6" aria-busy="true" aria-label="Loading">

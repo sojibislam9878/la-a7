@@ -31,7 +31,6 @@ export function FeaturedWarehousesSection({ children }: { children: React.ReactN
   )
 }
 
-/** Async Server Component, streamed in behind a Suspense boundary */
 export async function FeaturedWarehouses() {
   const result = await getPublicWarehouses({ sortBy: "avgRating", sortOrder: "desc", limit: 6 }).catch(
     () => null

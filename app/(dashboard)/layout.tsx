@@ -7,13 +7,10 @@ import { RoleGuard } from "@/components/dashboard/role-guard"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { parseRole, ROLE_COOKIE } from "@/lib/auth/role-cookie"
 
-// Server Component: reads the role hint and the sidebar's persisted open state
-// from cookies, so the correct navigation is in the first HTML response.
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies()
   const role = parseRole(cookieStore.get(ROLE_COOKIE)?.value)
 
-  // proxy.ts normally redirects first; this covers requests it did not match
   if (!role) redirect("/login")
 
   const defaultOpen = cookieStore.get("sidebar_state")?.value !== "false"

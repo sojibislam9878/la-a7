@@ -17,7 +17,6 @@ const HIGHLIGHTS = [
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative isolate min-h-svh overflow-hidden bg-cream bg-grain">
-      {/* Organic background blobs */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-32 -right-24 -z-10 size-[28rem] rounded-[42%_58%_63%_37%/45%_40%_60%_55%] bg-harvest/20 blur-2xl"
@@ -28,7 +27,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       />
 
       <div className="grid min-h-svh lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
-        {/* Brand panel, desktop only */}
         <aside className="relative m-4 hidden flex-col overflow-hidden rounded-[2.5rem] bg-forest bg-grain text-forest-foreground shadow-2xl shadow-forest/30 lg:flex">
           <div className="relative z-10 flex flex-col gap-10 p-10 xl:p-14">
             <Logo variant="light" />
@@ -67,7 +65,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             </ul>
           </div>
 
-          {/* Only shown when the viewport is tall enough to fit it above the scene */}
           <div className="relative z-10 hidden min-h-0 flex-1 items-center justify-center px-10 [@media(min-height:900px)]:flex">
             <BookingPreview />
           </div>
@@ -76,7 +73,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <FarmScene className="mt-auto" />
         </aside>
 
-        {/* Form column */}
         <div className="flex flex-col">
           <header className="flex h-16 items-center justify-between px-4 sm:px-8">
             <Logo className="lg:invisible" />
@@ -101,7 +97,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             </div>
           </main>
 
-          {/* Mobile / tablet: a slim strip of the landscape instead of the brand panel */}
           <div className="overflow-hidden bg-forest lg:hidden" aria-hidden>
             <FarmScene className="h-28 sm:h-36" />
           </div>

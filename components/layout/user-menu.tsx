@@ -17,16 +17,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ROLE_HOME, ROLE_LABEL } from "@/constants/routes"
 import { useLogout } from "@/hooks/use-logout"
+import { initials } from "@/lib/format"
 import type { User } from "@/types/user"
-
-export function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase())
-    .join("")
-}
 
 export function UserMenu({ user }: { user: User }) {
   const logout = useLogout()

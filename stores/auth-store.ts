@@ -3,10 +3,6 @@ import { create } from "zustand"
 import { clearRoleCookie, setRoleCookie } from "@/lib/auth/role-cookie"
 import type { User } from "@/types/user"
 
-/**
- * `loading` until the first refresh attempt on page load settles, then either
- * `authenticated` or `guest`. The access token is deliberately memory-only.
- */
 export type AuthStatus = "loading" | "authenticated" | "guest"
 
 type AuthState = {

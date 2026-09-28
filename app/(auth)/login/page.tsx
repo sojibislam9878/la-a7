@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   description: "Log in to AgroStore to manage your cold storage bookings.",
 }
 
-// Server Component shell: `?redirect=` comes from the route guard, `?email=`
-// from the OTP verification page.
 export default async function LoginPage({
   searchParams,
 }: {

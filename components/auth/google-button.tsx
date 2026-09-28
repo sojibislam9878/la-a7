@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { authApi } from "@/lib/api/auth"
 
-/** Full-page redirect to the backend's Google OAuth flow (farmer accounts only) */
 export function GoogleButton({ label = "Continue with Google" }: { label?: string }) {
   return (
     <Button

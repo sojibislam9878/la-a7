@@ -19,7 +19,6 @@ import { useWarehouseQuery } from "@/hooks/use-warehouse-query"
 import { countActiveFilters } from "@/lib/warehouse-query"
 import type { CropType } from "@/types/crop-type"
 
-/** Below `lg` the filter panel lives in a sheet instead of the sidebar */
 export function MobileFilters({ cropTypes }: { cropTypes: CropType[] }) {
   const [open, setOpen] = useState(false)
   const { query } = useWarehouseQuery()

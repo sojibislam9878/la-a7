@@ -78,7 +78,6 @@ export function AppSidebar({ role }: { role: Role }) {
       </SidebarContent>
 
       <SidebarFooter>
-        {/* Decorative card, hidden when the sidebar collapses to icons */}
         <div className="relative overflow-hidden rounded-xl bg-forest p-3 text-forest-foreground group-data-[collapsible=icon]:hidden">
           <Leaf className="absolute -right-2 -bottom-3 size-14 rotate-12 text-forest-foreground/15" />
           <p className="text-sm font-semibold">Harvest season?</p>

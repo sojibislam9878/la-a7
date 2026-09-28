@@ -13,10 +13,6 @@ import {
 } from "@/components/ui/select"
 import type { CropType } from "@/types/crop-type"
 
-/**
- * Plain GET form: submits to /warehouses?search=&district=&cropTypeId=
- * with client-side navigation, and still works before JS loads.
- */
 export function HeroSearch({ cropTypes }: { cropTypes: CropType[] }) {
   return (
     <Form

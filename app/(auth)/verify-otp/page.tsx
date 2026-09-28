@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   description: "Enter the 6-digit code we emailed you to activate your AgroStore account.",
 }
 
-// Server Component shell: `?email=` comes from signup or login, `?sent=0` when
-// the signup email could not be delivered.
 export default async function VerifyOtpPage({
   searchParams,
 }: {

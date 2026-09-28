@@ -4,11 +4,6 @@ import { ROLE_HOME } from "@/constants/routes"
 import { parseRole, ROLE_COOKIE } from "@/lib/auth/role-cookie"
 import type { Role } from "@/types/user"
 
-/**
- * Optimistic route guard. It only reads the `agro_role` hint cookie, so it can
- * redirect before any HTML is sent; the dashboard's client guard re-checks the
- * real session and the backend authorizes every API call.
- */
 const ROLE_AREAS: { prefix: string; role: Role }[] = [
   { prefix: "/farmer", role: "FARMER" },
   { prefix: "/owner", role: "WAREHOUSE_OWNER" },

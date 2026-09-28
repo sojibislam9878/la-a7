@@ -2,7 +2,6 @@ import { SproutIcon } from "lucide-react"
 
 import { PageHeader } from "@/components/dashboard/page-header"
 
-/** Temporary body for dashboard sections that are planned but not built yet */
 export function PagePlaceholder({ title, description }: { title: string; description: string }) {
   return (
     <div className="flex flex-col gap-6">

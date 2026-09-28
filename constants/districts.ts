@@ -1,4 +1,3 @@
-/** All 64 districts of Bangladesh, alphabetical */
 export const DISTRICTS = [
   "Bagerhat", "Bandarban", "Barguna", "Barishal", "Bhola", "Bogura", "Brahmanbaria",
   "Chandpur", "Chapainawabganj", "Chattogram", "Chuadanga", "Cox's Bazar", "Cumilla",

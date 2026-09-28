@@ -1,6 +1,5 @@
 import { CheckCircle2Icon, SnowflakeIcon, SproutIcon } from "lucide-react"
 
-/** Decorative glass card showing what a booking looks like; hidden from assistive tech */
 export function BookingPreview() {
   return (
     <div
@@ -28,7 +27,7 @@ export function BookingPreview() {
           <SnowflakeIcon className="size-4 text-harvest" />
           Chamber C-1 · 2°C to 4°C
         </span>
-        <span className="font-semibold">৳3,500</span>
+        <span className="font-semibold">$3,500</span>
       </div>
 
       <div className="mt-4">

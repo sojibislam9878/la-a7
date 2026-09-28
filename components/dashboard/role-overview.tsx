@@ -27,7 +27,7 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useDashboardSummary } from "@/hooks/use-dashboard"
 import { getErrorMessage } from "@/lib/api/form-errors"
-import { formatBdt, formatNumber } from "@/lib/format"
+import { formatMoney, formatNumber } from "@/lib/format"
 import { useAuthStore } from "@/stores/auth-store"
 import type { DashboardSummary } from "@/types/dashboard"
 import type { Role } from "@/types/user"
@@ -42,7 +42,7 @@ function statsFor(summary: DashboardSummary): Stat[] {
         { label: "Total bookings", value: formatNumber(summary.totalBookings), icon: CalendarCheckIcon, tone: "leaf" },
         { label: "Active bookings", value: formatNumber(summary.activeBookings), hint: "Approved, paid or stored", icon: CalendarClockIcon, tone: "sky" },
         { label: "Completed", value: formatNumber(summary.completedBookings), icon: CircleCheckBigIcon, tone: "harvest" },
-        { label: "Total spent", value: formatBdt(summary.totalSpentBdt), icon: BanknoteIcon, tone: "soil" },
+        { label: "Total spent", value: formatMoney(summary.totalSpentBdt), icon: BanknoteIcon, tone: "soil" },
       ]
     case "WAREHOUSE_OWNER":
       return [
@@ -56,7 +56,7 @@ function statsFor(summary: DashboardSummary): Stat[] {
         { label: "Users", value: formatNumber(summary.totalUsers), icon: UsersIcon, tone: "leaf" },
         { label: "Warehouses to review", value: formatNumber(summary.warehousesAwaitingApproval), icon: WarehouseIcon, tone: "harvest" },
         { label: "Bookings", value: formatNumber(summary.totalBookings), icon: CalendarCheckIcon, tone: "sky" },
-        { label: "Platform revenue", value: formatBdt(summary.platformRevenueBdt), icon: BanknoteIcon, tone: "soil" },
+        { label: "Platform revenue", value: formatMoney(summary.platformRevenueBdt), icon: BanknoteIcon, tone: "soil" },
       ]
   }
 }

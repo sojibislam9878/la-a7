@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils"
 
 const STEPS = ["Create account", "Verify email"] as const
 
-/** Two-step signup progress: register, then OTP verification */
 export function AuthSteps({ current }: { current: 1 | 2 }) {
   return (
     <ol className="flex items-center gap-3 text-xs font-medium" aria-label="Sign up progress">

@@ -6,7 +6,6 @@ import "./globals.css"
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-sans" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
-// Soft, organic serif for display headings
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-display", axes: ["SOFT", "opsz"] })
 
 export const metadata: Metadata = {

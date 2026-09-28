@@ -9,8 +9,6 @@ const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()
   const mounted = useMounted()
 
-  // Sonner writes the resolved theme into `data-sonner-theme`; the server can't
-  // know it (localStorage / OS preference), so render only on the client.
   if (!mounted) return null
 
   return (

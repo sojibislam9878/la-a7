@@ -30,7 +30,6 @@ export const PUBLIC_NAV_LINKS: NavLink[] = [
 
 export type DashboardNavItem = NavLink & {
   icon: LucideIcon
-  /** Match only the exact path (for section roots like `/farmer`) */
   exact?: boolean
 }
 
@@ -39,7 +38,6 @@ export type DashboardNavGroup = {
   items: DashboardNavItem[]
 }
 
-/** Sidebar navigation per role; order is display order */
 export const DASHBOARD_NAV: Record<Role, DashboardNavGroup[]> = {
   FARMER: [
     {
@@ -116,7 +114,6 @@ export function isDashboardItemActive(pathname: string, item: DashboardNavItem) 
   return pathname === item.href || pathname.startsWith(`${item.href}/`)
 }
 
-/** Finds the nav item for the current page (longest matching href wins) */
 export function findDashboardItem(role: Role, pathname: string) {
   return DASHBOARD_NAV[role]
     .flatMap((group) => group.items)

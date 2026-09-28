@@ -1,7 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 import { WarehouseResultsSkeleton } from "@/components/warehouse/warehouse-results"
 
-/** Instant navigation feedback while the search page renders on the server */
 export default function WarehousesLoading() {
   return (
     <>

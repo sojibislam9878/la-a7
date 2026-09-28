@@ -27,7 +27,6 @@ export function ThemeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Change theme">
-          {/* Icons swap with the `dark` class, so no client-only render is needed */}
           <SunIcon className="scale-100 rotate-0 transition-transform dark:scale-0 dark:-rotate-90" />
           <MoonIcon className="absolute scale-0 rotate-90 transition-transform dark:scale-100 dark:rotate-0" />
         </Button>

@@ -7,11 +7,6 @@ import { DashboardSkeleton } from "@/components/dashboard/dashboard-skeleton"
 import { ROLE_HOME } from "@/constants/routes"
 import { useAuthStore } from "@/stores/auth-store"
 
-/**
- * Authoritative client-side check. `proxy.ts` only sees the role hint cookie,
- * so this waits for the real session and redirects when it is missing or the
- * role does not own this area.
- */
 export function RoleGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()

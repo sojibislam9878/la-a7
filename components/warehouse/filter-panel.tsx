@@ -38,10 +38,6 @@ function toFormValues(query: WarehouseQuery): WarehouseFilterFormValues {
 
 const num = (value: string) => (value === "" ? undefined : Number(value))
 
-/**
- * Filters apply automatically (debounced) and live in the URL. React Hook Form
- * + Zod validate them first, so an impossible rate range never reaches the API.
- */
 export function FilterPanel({ cropTypes, className }: { cropTypes: CropType[]; className?: string }) {
   const { query, update } = useWarehouseQuery()
   const urlValues = useMemo(() => toFormValues(query), [query])
@@ -61,7 +57,6 @@ export function FilterPanel({ cropTypes, className }: { cropTypes: CropType[]; c
     formState: { errors },
   } = form
 
-  // URL → form, when something else changed the URL (chips, back button)
   useEffect(() => {
     if (JSON.stringify(getValues()) !== JSON.stringify(urlValues)) reset(urlValues)
   }, [urlValues, getValues, reset])
@@ -79,7 +74,6 @@ export function FilterPanel({ cropTypes, className }: { cropTypes: CropType[]; c
     [update]
   )
 
-  // Form → URL, debounced; `reset` events have no `type` and are ignored
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined
     const unsubscribe = subscribe({
@@ -203,7 +197,7 @@ export function FilterPanel({ cropTypes, className }: { cropTypes: CropType[]; c
 
         <FieldSet className="gap-2">
           <FieldLegend variant="label" className="mb-0">
-            Rate (৳ per kg per day)
+            Rate ($ per kg per day)
           </FieldLegend>
           <div className="grid grid-cols-2 gap-2">
             <Field data-invalid={!!errors.minRate || undefined}>
@@ -234,7 +228,7 @@ export function FilterPanel({ cropTypes, className }: { cropTypes: CropType[]; c
             </Field>
           </div>
           <FieldError errors={[errors.minRate, errors.maxRate]} />
-          <p className="text-xs text-muted-foreground">Most warehouses charge ৳0.03 to ৳0.06.</p>
+          <p className="text-xs text-muted-foreground">Most warehouses charge $0.03 to $0.06.</p>
         </FieldSet>
 
         <FieldSet className="gap-2">

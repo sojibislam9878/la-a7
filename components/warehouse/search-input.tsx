@@ -17,8 +17,6 @@ export function SearchInput() {
   const [syncedUrlValue, setSyncedUrlValue] = useState(urlValue)
   const [pushedValue, setPushedValue] = useState(urlValue)
 
-  // Follow external URL changes (clear filters, back button) without clobbering
-  // text typed after our own debounced update was sent.
   if (urlValue !== syncedUrlValue) {
     setSyncedUrlValue(urlValue)
     if (urlValue !== pushedValue) setValue(urlValue)

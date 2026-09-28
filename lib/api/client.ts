@@ -18,7 +18,6 @@ export type RequestOptions = {
   body?: unknown
   token?: string | null
   signal?: AbortSignal
-  /** Let the request finish (and its Set-Cookie apply) even if the page unloads */
   keepalive?: boolean
 }
 
@@ -28,11 +27,6 @@ export type ApiResult<T> = {
   meta?: PaginationMeta
 }
 
-/**
- * Browser-side request to the backend. Sends cookies (the refresh token lives in
- * an httpOnly cookie on the API domain) and unwraps the `{ success, data }` envelope.
- * Token refresh on 401 is layered on top in task 1.1.
- */
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<ApiResult<T>> {
   const { method = "GET", body, token, signal, keepalive } = options
 
