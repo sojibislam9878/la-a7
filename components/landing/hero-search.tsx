@@ -30,7 +30,7 @@ export function HeroSearch({ cropTypes }: { cropTypes: CropType[] }) {
       </label>
 
       <Select name="district">
-        <SelectTrigger aria-label="District" className="h-10! w-full sm:w-40">
+        <SelectTrigger aria-label="District" className="h-10! w-full text-left sm:w-40 *:data-[slot=select-value]:grow">
           <MapPinIcon aria-hidden />
           <SelectValue placeholder="District" />
         </SelectTrigger>
@@ -44,7 +44,7 @@ export function HeroSearch({ cropTypes }: { cropTypes: CropType[] }) {
       </Select>
 
       <Select name="cropTypeId">
-        <SelectTrigger aria-label="Crop" className="h-10! w-full sm:w-40">
+        <SelectTrigger aria-label="Crop" className="h-10! w-full text-left sm:w-40 *:data-[slot=select-value]:grow">
           <SproutIcon aria-hidden />
           <SelectValue placeholder="Crop" />
         </SelectTrigger>
