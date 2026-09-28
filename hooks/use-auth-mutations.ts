@@ -10,6 +10,20 @@ export function useSignup() {
   })
 }
 
+export function useVerifyOtp() {
+  return useMutation({
+    mutationKey: ["auth", "verify-otp"],
+    mutationFn: (payload: { email: string; otp: string }) => authApi.verifyOtp(payload),
+  })
+}
+
+export function useResendOtp() {
+  return useMutation({
+    mutationKey: ["auth", "resend-otp"],
+    mutationFn: (payload: { email: string }) => authApi.resendOtp(payload),
+  })
+}
+
 export function useLogin() {
   const queryClient = useQueryClient()
   const setSession = useAuthStore((state) => state.setSession)

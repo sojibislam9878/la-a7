@@ -160,7 +160,7 @@ function NoticeAlert({ notice }: { notice: LoginNotice }) {
         <AlertTitle>Verify your email first</AlertTitle>
         <AlertDescription>
           <p>Enter the 6-digit code we emailed you to activate your account.</p>
-          <Button size="sm" className="mt-2 rounded-full" asChild>
+          <Button size="sm" className="mt-2 rounded-full no-underline! hover:text-primary-foreground!" asChild>
             <Link href={`/verify-otp?${new URLSearchParams({ email: notice.email }).toString()}`}>
               Verify email
               <ArrowRightIcon data-icon="inline-end" aria-hidden />

@@ -25,6 +25,7 @@ import {
   FieldSet,
 } from "@/components/ui/field"
 import { useSignup } from "@/hooks/use-auth-mutations"
+import { markOtpSent } from "@/hooks/use-otp-cooldown"
 import { ApiError } from "@/lib/api/client"
 import { applyServerFieldErrors, getErrorMessage } from "@/lib/api/form-errors"
 import { registerSchema, type RegisterFormValues } from "@/schemas/auth"
@@ -78,6 +79,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: SelfServiceRole }) 
       },
       {
         onSuccess: () => {
+          markOtpSent(email)
           toast.success("Account created", {
             description: `We sent a 6-digit verification code to ${email}.`,
           })

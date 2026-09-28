@@ -57,3 +57,16 @@ export const loginSchema = z.object({
 })
 
 export type LoginFormValues = z.infer<typeof loginSchema>
+
+export const OTP_LENGTH = 6
+
+export const verifyOtpSchema = z.object({
+  email: emailSchema,
+  otp: z
+    .string()
+    .trim()
+    .regex(/^\d+$/, { error: "The code contains digits only" })
+    .length(OTP_LENGTH, { error: `Enter the ${OTP_LENGTH}-digit code` }),
+})
+
+export type VerifyOtpFormValues = z.infer<typeof verifyOtpSchema>
