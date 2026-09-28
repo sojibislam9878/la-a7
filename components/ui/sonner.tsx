@@ -3,9 +3,15 @@
 import { useTheme } from "next-themes"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "lucide-react"
+import { useMounted } from "@/hooks/use-mounted"
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()
+  const mounted = useMounted()
+
+  // Sonner writes the resolved theme into `data-sonner-theme`; the server can't
+  // know it (localStorage / OS preference), so render only on the client.
+  if (!mounted) return null
 
   return (
     <Sonner
