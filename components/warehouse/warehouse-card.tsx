@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { BoxesIcon, CalendarClockIcon, MapPinIcon, StarIcon, WarehouseIcon } from "lucide-react"
+import { BoxesIcon, CalendarClockIcon, DoorOpenIcon, type LucideIcon, MapPinIcon, StarIcon, WarehouseIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -34,20 +34,14 @@ export function WarehouseCard({ warehouse }: { warehouse: Warehouse }) {
       </CardHeader>
 
       <CardContent>
-        <dl className="grid grid-cols-2 gap-3 text-sm">
-          <div className="flex items-center gap-2">
-            <BoxesIcon className="size-4 text-muted-foreground" aria-hidden />
-            <dt className="sr-only">Total capacity</dt>
-            <dd>
-              {formatKg(warehouse.totalCapacityKg)} · {warehouse.chamberCount}{" "}
-              {warehouse.chamberCount === 1 ? "chamber" : "chambers"}
-            </dd>
-          </div>
-          <div className="flex items-center gap-2">
-            <CalendarClockIcon className="size-4 text-muted-foreground" aria-hidden />
-            <dt className="sr-only">Minimum booking</dt>
-            <dd>Min {warehouse.minBookingDays} days</dd>
-          </div>
+        <dl className="flex flex-wrap gap-2 text-sm">
+          <Stat icon={BoxesIcon} label="Total capacity" value={`${formatKg(warehouse.totalCapacityKg)} capacity`} />
+          <Stat
+            icon={DoorOpenIcon}
+            label="Chambers"
+            value={`${warehouse.chamberCount} ${warehouse.chamberCount === 1 ? "chamber" : "chambers"}`}
+          />
+          <Stat icon={CalendarClockIcon} label="Minimum booking" value={`Min ${warehouse.minBookingDays} days`} />
         </dl>
       </CardContent>
 
@@ -73,5 +67,15 @@ function Rating({ avg, count }: { avg: number | null; count: number }) {
       <span className="font-normal text-muted-foreground">({count})</span>
       <span className="sr-only">average rating from {count} reviews</span>
     </span>
+  )
+}
+
+function Stat({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
+  return (
+    <div className="flex items-center gap-1.5 rounded-full bg-cream px-2.5 py-1 dark:bg-muted">
+      <Icon className="size-3.5 text-muted-foreground" aria-hidden />
+      <dt className="sr-only">{label}</dt>
+      <dd className="whitespace-nowrap">{value}</dd>
+    </div>
   )
 }
