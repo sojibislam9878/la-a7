@@ -30,6 +30,17 @@ export type Booking = {
   warehouse: { id: string; name: string; district: string }
   farmer: { id: string; name: string; phone: string | null }
   review?: BookingReview | null
+  inspection?: BookingInspection | null
+}
+
+export type QualityGrade = "A" | "B" | "C" | "REJECTED"
+
+export type BookingInspection = {
+  id: string
+  grade: QualityGrade
+  actualQtyKg: number
+  moisturePct: number | null
+  inspectedAt: string
 }
 
 export type BookingReview = {

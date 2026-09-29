@@ -9,6 +9,7 @@ import type {
   AuditLogQuery,
   PlatformStats,
 } from "@/types/admin"
+import type { Booking, BookingListQuery, QualityGrade } from "@/types/booking"
 import type { Role } from "@/types/user"
 import type { WarehouseStatus } from "@/types/warehouse"
 
@@ -45,4 +46,33 @@ export const adminApi = {
     }),
   auditLogs: (query: AuditLogQuery, signal?: AbortSignal) =>
     authedRequest<AuditLogEntry[]>(`/admin/audit-logs${toQueryString(query)}`, { signal }),
+  bookings: (query: BookingListQuery, signal?: AbortSignal) =>
+    authedRequest<Booking[]>(`/admin/bookings${toQueryString(query)}`, { signal }),
+  recordInspection: (bookingId: string, payload: InspectionPayload) =>
+    authedRequest<InspectionRecord>(`/admin/bookings/${bookingId}/inspection`, { method: "POST", body: payload }),
+}
+
+export type InspectionPayload = {
+  grade: QualityGrade
+  actualQtyKg: number
+  moisturePct?: number
+  notes?: string
+}
+
+export type InspectionRecord = {
+  id: string
+  grade: QualityGrade
+  moisturePct: number | null
+  actualQtyKg: number
+  notes: string | null
+  inspectedAt: string
+  inspector: { id: string; name: string }
+  booking: {
+    id: string
+    lotCode: string
+    status: string
+    quantityKg: number
+    farmer: { id: string; name: string }
+    warehouse: { id: string; name: string }
+  }
 }

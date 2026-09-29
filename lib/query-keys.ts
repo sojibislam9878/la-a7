@@ -16,6 +16,7 @@ export const queryKeys = {
   adminUser: (id: string) => ["admin", "users", "detail", id] as const,
   auditLogs: (query: AuditLogQuery) => ["admin", "audit-logs", query] as const,
   cropTypes: (query: CropTypeListQuery) => ["crop-types", query] as const,
+  adminBookings: (query: BookingListQuery) => ["bookings", "admin", query] as const,
   bookings: ["bookings"] as const,
   myBookings: (query: BookingListQuery) => ["bookings", "mine", query] as const,
   warehouseBookings: (warehouseId: string, query: BookingListQuery) => ["bookings", "warehouse", warehouseId, query] as const,
