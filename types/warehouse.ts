@@ -106,3 +106,22 @@ export type WarehouseQuery = {
   page?: number
   limit?: number
 }
+
+export type MyWarehouseSortBy = "createdAt" | "name" | "ratePerKgPerDay" | "avgRating"
+
+export type MyWarehouseListQuery = {
+  status?: WarehouseStatus
+  sortBy?: MyWarehouseSortBy
+  sortOrder?: "asc" | "desc"
+  page?: number
+  limit?: number
+}
+
+export type WarehousePayload = {
+  name?: string
+  district?: string
+  address?: string
+  licenseNo?: string
+  ratePerKgPerDay?: number
+  minBookingDays?: number
+}
