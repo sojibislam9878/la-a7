@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LogOutIcon, SnowflakeIcon } from "lucide-react"
+import { LockIcon, LogOutIcon, SnowflakeIcon } from "lucide-react"
 
 import { Leaf } from "@/components/shared/leaf"
 import {
@@ -20,13 +20,15 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { DASHBOARD_NAV, isDashboardItemActive } from "@/constants/navigation"
-import { ROLE_LABEL } from "@/constants/routes"
+import { isOwnerUngatedPath, needsOnboarding, ROLE_LABEL } from "@/constants/routes"
 import { useLogout } from "@/hooks/use-logout"
+import { useAuthStore } from "@/stores/auth-store"
 import type { Role } from "@/types/user"
 
 export function AppSidebar({ role }: { role: Role }) {
   const pathname = usePathname()
   const logout = useLogout()
+  const onboarding = useAuthStore((state) => needsOnboarding(state.user))
   const { isMobile, setOpenMobile } = useSidebar()
   const closeOnMobile = () => isMobile && setOpenMobile(false)
 
@@ -60,6 +62,22 @@ export function AppSidebar({ role }: { role: Role }) {
               <SidebarMenu>
                 {group.items.map((item) => {
                   const active = isDashboardItemActive(pathname, item)
+                  if (onboarding && !isOwnerUngatedPath(item.href)) {
+                    return (
+                      <SidebarMenuItem key={item.href}>
+                        <SidebarMenuButton
+                          disabled
+                          aria-disabled
+                          tooltip={`${item.label} unlocks after your business profile`}
+                          className="opacity-60"
+                        >
+                          <item.icon aria-hidden />
+                          <span>{item.label}</span>
+                          <LockIcon className="ml-auto size-3.5!" aria-label="Locked" />
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    )
+                  }
                   return (
                     <SidebarMenuItem key={item.href}>
                       <SidebarMenuButton asChild isActive={active} tooltip={item.label}>

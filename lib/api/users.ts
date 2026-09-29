@@ -1,6 +1,7 @@
 import { authedRequest } from "@/lib/api/authed"
 import type { DashboardSummary } from "@/types/dashboard"
 import type { FarmerProfile, FarmerProfilePayload } from "@/types/farmer"
+import type { OwnerProfile, OwnerProfilePayload } from "@/types/owner"
 import type { User } from "@/types/user"
 
 export type UpdateMePayload = { name?: string; phone?: string }
@@ -21,4 +22,10 @@ export const usersApi = {
     authedRequest<FarmerProfile>("/users/me/farmer-profile", { method: "POST", body: payload }),
   updateFarmerProfile: (payload: FarmerProfilePayload) =>
     authedRequest<FarmerProfile>("/users/me/farmer-profile", { method: "PATCH", body: payload }),
+
+  getOwnerProfile: (signal?: AbortSignal) => authedRequest<OwnerProfile>("/users/me/owner-profile", { signal }),
+  createOwnerProfile: (payload: OwnerProfilePayload) =>
+    authedRequest<OwnerProfile>("/users/me/owner-profile", { method: "POST", body: payload }),
+  updateOwnerProfile: (payload: OwnerProfilePayload) =>
+    authedRequest<OwnerProfile>("/users/me/owner-profile", { method: "PATCH", body: payload }),
 }

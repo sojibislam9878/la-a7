@@ -81,3 +81,30 @@ export const deleteAccountSchema = z.object({
 })
 
 export type DeleteAccountValues = z.infer<typeof deleteAccountSchema>
+
+export const ownerProfileSchema = z.object({
+  businessName: z
+    .string()
+    .trim()
+    .min(2, { error: "Business name must be at least 2 characters" })
+    .max(120, { error: "Business name must be at most 120 characters" }),
+  tradeLicenseNo: z
+    .string()
+    .trim()
+    .min(4, { error: "Trade license number must be at least 4 characters" })
+    .max(40, { error: "Trade license number must be at most 40 characters" }),
+  nid: z
+    .string()
+    .trim()
+    .regex(/^(\d{10}|\d{13}|\d{17})$/, { error: "NID must be 10, 13 or 17 digits" }),
+  district: z
+    .string()
+    .refine((value) => (DISTRICTS as readonly string[]).includes(value), { error: "Choose the district of your business" }),
+  address: z
+    .string()
+    .trim()
+    .min(5, { error: "Address must be at least 5 characters" })
+    .max(255, { error: "Address must be at most 255 characters" }),
+})
+
+export type OwnerProfileValues = z.infer<typeof ownerProfileSchema>

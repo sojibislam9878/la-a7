@@ -6,13 +6,12 @@ import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { inputClass } from "@/components/profile/account-form"
+import { DistrictSelect } from "@/components/shared/district-select"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
-import { DISTRICTS } from "@/constants/districts"
 import { useFarmerProfile, useSaveFarmerProfile } from "@/hooks/use-profile"
 import { applyServerFieldErrors, getErrorMessage } from "@/lib/api/form-errors"
 import { createFarmerProfileSchema, type FarmerProfileValues } from "@/schemas/profile"
@@ -125,23 +124,14 @@ function FarmerProfileForm({ profile }: { profile: FarmerProfile | null }) {
             control={control}
             name="district"
             render={({ field }) => (
-              <Select value={field.value || undefined} onValueChange={field.onChange} name={field.name}>
-                <SelectTrigger
-                  id="farmer-district"
-                  aria-invalid={!!errors.district}
-                  onBlur={field.onBlur}
-                  className="h-10! w-full rounded-xl border-soil/15 bg-card text-left *:data-[slot=select-value]:grow"
-                >
-                  <SelectValue placeholder="Choose a district" />
-                </SelectTrigger>
-                <SelectContent position="popper" className="max-h-72">
-                  {DISTRICTS.map((district) => (
-                    <SelectItem key={district} value={district}>
-                      {district}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <DistrictSelect
+                id="farmer-district"
+                name={field.name}
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                invalid={!!errors.district}
+              />
             )}
           />
           <FieldError errors={[errors.district]} />

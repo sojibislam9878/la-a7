@@ -5,6 +5,7 @@ import type { PaymentListQuery } from "@/types/payment"
 export const queryKeys = {
   me: ["users", "me"] as const,
   farmerProfile: ["users", "me", "farmer-profile"] as const,
+  ownerProfile: ["users", "me", "owner-profile"] as const,
   dashboard: ["users", "me", "dashboard"] as const,
   bookings: ["bookings"] as const,
   myBookings: (query: BookingListQuery) => ["bookings", "mine", query] as const,

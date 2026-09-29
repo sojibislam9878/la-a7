@@ -8,6 +8,7 @@ import { type UpdateMePayload, usersApi } from "@/lib/api/users"
 import { queryKeys } from "@/lib/query-keys"
 import { useAuthStore } from "@/stores/auth-store"
 import type { FarmerProfile, FarmerProfilePayload } from "@/types/farmer"
+import type { OwnerProfile, OwnerProfilePayload } from "@/types/owner"
 
 export function useFarmerProfile() {
   const authenticated = useAuthStore((state) => state.status === "authenticated")
@@ -72,6 +73,46 @@ export function useDeleteAccount() {
       queryClient.clear()
       toast.success("Your account was deleted", { description: "Thanks for using AgroStore." })
       router.replace("/")
+    },
+  })
+}
+
+export function useOwnerProfile() {
+  const authenticated = useAuthStore((state) => state.status === "authenticated")
+
+  return useQuery({
+    queryKey: queryKeys.ownerProfile,
+    queryFn: async ({ signal }): Promise<OwnerProfile | null> => {
+      try {
+        return (await usersApi.getOwnerProfile(signal)).data
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 404) return null
+        throw error
+      }
+    },
+    enabled: authenticated,
+  })
+}
+
+export function useSaveOwnerProfile() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ["users", "owner-profile"],
+    mutationFn: async ({ payload, create }: { payload: OwnerProfilePayload; create: boolean }) =>
+      (await (create ? usersApi.createOwnerProfile(payload) : usersApi.updateOwnerProfile(payload))).data,
+    onSuccess: (profile, { create }) => {
+      queryClient.setQueryData(queryKeys.ownerProfile, profile)
+      if (create) {
+        const { user, setUser } = useAuthStore.getState()
+        if (user) {
+          const updated = { ...user, profileComplete: true }
+          setUser(updated)
+          queryClient.setQueryData(queryKeys.me, updated)
+        }
+      }
+      void queryClient.invalidateQueries({ queryKey: queryKeys.dashboard })
+      if (!create) toast.success("Business profile saved")
     },
   })
 }
