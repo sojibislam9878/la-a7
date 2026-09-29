@@ -1,5 +1,15 @@
 import { authedRequest } from "@/lib/api/authed"
-import type { AdminWarehouse, AdminWarehouseQuery, PlatformStats } from "@/types/admin"
+import type {
+  AdminUser,
+  AdminUserDetail,
+  AdminUserQuery,
+  AdminWarehouse,
+  AdminWarehouseQuery,
+  AuditLogEntry,
+  AuditLogQuery,
+  PlatformStats,
+} from "@/types/admin"
+import type { Role } from "@/types/user"
 import type { WarehouseStatus } from "@/types/warehouse"
 
 function toQueryString(query: Record<string, string | number | undefined>) {
@@ -20,4 +30,19 @@ export const adminApi = {
       method: "PATCH",
       body: reason ? { status, reason } : { status },
     }),
+  users: (query: AdminUserQuery, signal?: AbortSignal) =>
+    authedRequest<AdminUser[]>(`/admin/users${toQueryString(query)}`, { signal }),
+  user: (id: string, signal?: AbortSignal) => authedRequest<AdminUserDetail>(`/admin/users/${id}`, { signal }),
+  setUserStatus: (id: string, status: AdminUser["status"], reason?: string) =>
+    authedRequest<Pick<AdminUser, "id" | "name" | "email" | "role" | "status">>(`/admin/users/${id}/status`, {
+      method: "PATCH",
+      body: reason ? { status, reason } : { status },
+    }),
+  setUserRole: (id: string, role: Role, reason?: string) =>
+    authedRequest<Pick<AdminUser, "id" | "name" | "email" | "role" | "status">>(`/admin/users/${id}/role`, {
+      method: "PATCH",
+      body: reason ? { role, reason } : { role },
+    }),
+  auditLogs: (query: AuditLogQuery, signal?: AbortSignal) =>
+    authedRequest<AuditLogEntry[]>(`/admin/audit-logs${toQueryString(query)}`, { signal }),
 }

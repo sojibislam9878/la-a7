@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
-import { PagePlaceholder } from "@/components/dashboard/page-placeholder"
+import { AdminUsers } from "@/components/admin/users/admin-users"
 
 export const metadata: Metadata = { title: "Users" }
 
 export default function AdminUsersPage() {
-  return <PagePlaceholder title="Users" description="Search accounts, change roles and manage bans." />
+  return <AdminUsers />
 }

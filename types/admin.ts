@@ -52,3 +52,58 @@ export type AdminWarehouseQuery = {
   page?: number
   limit?: number
 }
+
+export type AdminUser = {
+  id: string
+  name: string
+  email: string
+  phone: string | null
+  role: Role
+  status: "ACTIVE" | "BANNED"
+  emailVerified: boolean
+  hasPassword: boolean
+  linkedGoogle: boolean
+  profileComplete: boolean
+  deletedAt: string | null
+  createdAt: string
+}
+
+export type AdminUserDetail = AdminUser & {
+  farmerProfile: { district: string; upazila: string | null; nid: string | null; farmSizeAcre: number | null } | null
+  ownerProfile: { businessName: string; tradeLicenseNo: string; nid: string; district: string; address: string } | null
+  counts: { warehouses: number; bookings: number }
+}
+
+export type AdminUserQuery = {
+  search?: string
+  role?: Role
+  status?: "ACTIVE" | "BANNED"
+  verified?: "true" | "false"
+  includeDeleted?: "true"
+  sortBy?: "createdAt" | "name" | "email" | "role"
+  sortOrder?: "asc" | "desc"
+  page?: number
+  limit?: number
+}
+
+export type AuditLogEntry = {
+  id: string
+  action: string
+  entityType: string
+  entityId: string
+  before: unknown
+  after: unknown
+  ip: string | null
+  createdAt: string
+  actor: { id: string; name: string; role: Role } | null
+}
+
+export type AuditLogQuery = {
+  entityType?: string
+  entityId?: string
+  actorId?: string
+  action?: string
+  sortOrder?: "asc" | "desc"
+  page?: number
+  limit?: number
+}
