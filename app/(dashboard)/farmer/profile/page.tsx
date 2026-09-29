@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
-import { PagePlaceholder } from "@/components/dashboard/page-placeholder"
+import { FarmerProfileView } from "@/components/profile/farmer-profile-view"
 
 export const metadata: Metadata = { title: "Profile" }
 
 export default function FarmerProfilePage() {
-  return <PagePlaceholder title="Profile" description="Your account details and farming profile." />
+  return <FarmerProfileView />
 }

@@ -12,17 +12,18 @@ export function RoleGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const status = useAuthStore((state) => state.status)
   const role = useAuthStore((state) => state.user?.role)
+  const signedOut = useAuthStore((state) => state.signedOut)
 
   const home = role ? ROLE_HOME[role] : null
   const allowed = status === "authenticated" && home !== null && (pathname === home || pathname.startsWith(`${home}/`))
 
   useEffect(() => {
-    if (status === "guest") {
+    if (status === "guest" && !signedOut) {
       router.replace(`/login?${new URLSearchParams({ redirect: pathname }).toString()}`)
     } else if (status === "authenticated" && home && !allowed) {
       router.replace(home)
     }
-  }, [status, home, allowed, pathname, router])
+  }, [status, signedOut, home, allowed, pathname, router])
 
   if (!allowed) return <DashboardSkeleton />
   return children

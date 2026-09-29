@@ -14,7 +14,7 @@ export function useLogout() {
     mutationKey: ["auth", "logout"],
     mutationFn: () => authApi.logout(),
     onSettled: () => {
-      clearSession()
+      clearSession({ signedOut: true })
       queryClient.clear()
       toast.success("You have been logged out")
       router.replace("/login")
