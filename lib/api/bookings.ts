@@ -19,4 +19,12 @@ export const bookingsApi = {
   cancel: (id: string, reason?: string) =>
     authedRequest<Booking>(`/bookings/${id}/cancel`, { method: "PATCH", body: reason ? { reason } : {} }),
   requestWithdrawal: (id: string) => authedRequest<Booking>(`/bookings/${id}/withdraw-request`, { method: "PATCH" }),
+
+  listForWarehouse: (warehouseId: string, query: BookingListQuery, signal?: AbortSignal) =>
+    authedRequest<Booking[]>(`/warehouses/${warehouseId}/bookings${toQueryString(query)}`, { signal }),
+  approve: (id: string) => authedRequest<Booking>(`/bookings/${id}/approve`, { method: "PATCH" }),
+  reject: (id: string, reason?: string) =>
+    authedRequest<Booking>(`/bookings/${id}/reject`, { method: "PATCH", body: reason ? { reason } : {} }),
+  store: (id: string) => authedRequest<Booking>(`/bookings/${id}/store`, { method: "PATCH" }),
+  complete: (id: string) => authedRequest<Booking>(`/bookings/${id}/complete`, { method: "PATCH" }),
 }

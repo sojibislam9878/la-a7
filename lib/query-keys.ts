@@ -10,6 +10,7 @@ export const queryKeys = {
   dashboard: ["users", "me", "dashboard"] as const,
   bookings: ["bookings"] as const,
   myBookings: (query: BookingListQuery) => ["bookings", "mine", query] as const,
+  warehouseBookings: (warehouseId: string, query: BookingListQuery) => ["bookings", "warehouse", warehouseId, query] as const,
   booking: (id: string) => ["bookings", "detail", id] as const,
   bookingInvoice: (id: string) => ["bookings", "invoice", id] as const,
   payments: ["payments"] as const,
