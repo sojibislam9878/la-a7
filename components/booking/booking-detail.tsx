@@ -22,6 +22,7 @@ import { HoldCountdown } from "@/components/booking/hold-countdown"
 import { StatusBadge } from "@/components/booking/status-badge"
 import { DashboardSkeleton } from "@/components/dashboard/dashboard-skeleton"
 import { PayButton } from "@/components/payment/pay-button"
+import { BookingReview } from "@/components/review/booking-review"
 import { EmptyState } from "@/components/shared/empty-state"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -160,6 +161,18 @@ function BookingDetailView({ id }: { id: string }) {
             </h2>
             <BookingTimeline booking={data} payment={invoice.data?.payment} now={now} />
           </section>
+
+          {data.status === "COMPLETED" && (
+            <section
+              aria-labelledby="review-heading"
+              className="flex flex-col gap-4 rounded-3xl border border-soil/10 bg-card p-5 sm:p-6"
+            >
+              <h2 id="review-heading" className="font-display text-xl font-semibold">
+                Your review
+              </h2>
+              <BookingReview booking={data} />
+            </section>
+          )}
 
           <section aria-labelledby="lot-heading" className="flex flex-col gap-4 rounded-3xl border border-soil/10 bg-card p-5 sm:p-6">
             <div className="flex flex-wrap items-start justify-between gap-3">

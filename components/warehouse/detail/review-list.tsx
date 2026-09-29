@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { format, parseISO } from "date-fns"
-import { ChevronLeftIcon, ChevronRightIcon, MessageSquareQuoteIcon, StarIcon } from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon, MessageSquareQuoteIcon } from "lucide-react"
 
+import { Stars } from "@/components/review/stars"
 import { EmptyState } from "@/components/shared/empty-state"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { buttonVariants } from "@/components/ui/button"
@@ -9,20 +10,6 @@ import { initials } from "@/lib/format"
 import { cn } from "@/lib/utils"
 import type { Paginated } from "@/types/api"
 import type { Review } from "@/types/warehouse"
-
-function Stars({ rating, className }: { rating: number; className?: string }) {
-  return (
-    <span className={cn("flex items-center gap-0.5", className)} role="img" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <StarIcon
-          key={i}
-          className={cn("size-4", i < Math.round(rating) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/40")}
-          aria-hidden
-        />
-      ))}
-    </span>
-  )
-}
 
 export function ReviewList({
   reviews,

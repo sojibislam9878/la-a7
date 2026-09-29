@@ -29,6 +29,14 @@ export type Booking = {
   chamber: { id: string; name: string; minTempC: number; maxTempC: number }
   warehouse: { id: string; name: string; district: string }
   farmer: { id: string; name: string; phone: string | null }
+  review?: BookingReview | null
+}
+
+export type BookingReview = {
+  id: string
+  rating: number
+  comment: string | null
+  createdAt: string
 }
 
 export type CreateBookingPayload = {
