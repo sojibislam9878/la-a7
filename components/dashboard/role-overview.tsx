@@ -19,6 +19,7 @@ import {
   WarehouseIcon,
 } from "lucide-react"
 
+import { AdminInsights } from "@/components/admin/admin-insights"
 import { PageHeader } from "@/components/dashboard/page-header"
 import { StatCard, type StatTone } from "@/components/dashboard/stat-card"
 import { Leaf } from "@/components/shared/leaf"
@@ -119,6 +120,8 @@ export function RoleOverview({ role }: { role: Role }) {
             : Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-32 rounded-2xl sm:h-[8.5rem]" />)}
         </section>
       )}
+
+      {role === "ADMIN" && <AdminInsights />}
 
       <section aria-labelledby="quick-actions" className="flex flex-col gap-4">
         <h2 id="quick-actions" className="text-lg font-semibold">

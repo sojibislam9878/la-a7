@@ -8,6 +8,7 @@ export const queryKeys = {
   farmerProfile: ["users", "me", "farmer-profile"] as const,
   ownerProfile: ["users", "me", "owner-profile"] as const,
   dashboard: ["users", "me", "dashboard"] as const,
+  adminStats: ["admin", "stats"] as const,
   bookings: ["bookings"] as const,
   myBookings: (query: BookingListQuery) => ["bookings", "mine", query] as const,
   warehouseBookings: (warehouseId: string, query: BookingListQuery) => ["bookings", "warehouse", warehouseId, query] as const,
