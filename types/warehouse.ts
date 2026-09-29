@@ -125,3 +125,11 @@ export type WarehousePayload = {
   ratePerKgPerDay?: number
   minBookingDays?: number
 }
+
+export type ChamberPayload = {
+  name?: string
+  capacityKg?: number
+  minTempC?: number
+  maxTempC?: number
+  isActive?: boolean
+}

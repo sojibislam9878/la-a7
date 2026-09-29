@@ -17,6 +17,7 @@ export const queryKeys = {
   paymentSession: (sessionId: string) => ["payments", "session", sessionId] as const,
   myWarehouses: (query: MyWarehouseListQuery) => ["warehouses", "mine", query] as const,
   ownerWarehouse: (id: string) => ["warehouses", "detail", id] as const,
+  warehouseChambers: (warehouseId: string) => ["warehouses", "chambers", warehouseId] as const,
   warehouseAvailability: (warehouseId: string, params: AvailabilityParams) =>
     ["availability", "warehouse", warehouseId, params] as const,
   chamberAvailability: (chamberId: string, params: AvailabilityParams) =>
