@@ -15,6 +15,7 @@ import {
   TagIcon,
 } from "lucide-react"
 
+import { BookingActions } from "@/components/booking/booking-actions"
 import { BookingCharges } from "@/components/booking/booking-charges"
 import { BookingTimeline } from "@/components/booking/booking-timeline"
 import { HoldCountdown } from "@/components/booking/hold-countdown"
@@ -119,7 +120,13 @@ function BookingDetailView({ id }: { id: string }) {
               Requested on {format(parseISO(data.createdAt), "MMM d, yyyy 'at' h:mm a")}
             </p>
           </div>
+          <BookingActions booking={data} invoice={invoice.data} />
         </div>
+        {data.status === "PAID" && (
+          <p className="text-xs text-muted-foreground">
+            Paid bookings can&apos;t be cancelled here. Contact support at support@agrostore.com for a refund.
+          </p>
+        )}
       </div>
 
       <div className={cn("flex flex-col gap-3 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between", STATUS_TONE_CLASS[meta.tone])}>

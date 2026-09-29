@@ -88,3 +88,13 @@ export function createBookingSchema(rules: BookingRules) {
 }
 
 export type BookingFormValues = z.infer<ReturnType<typeof createBookingSchema>>
+
+export const cancelBookingSchema = z.object({
+  reason: z
+    .string()
+    .trim()
+    .max(255, { error: "Keep the reason under 255 characters" })
+    .refine((value) => value === "" || value.length >= 3, { error: "Write at least 3 characters, or leave it empty" }),
+})
+
+export type CancelBookingValues = z.infer<typeof cancelBookingSchema>

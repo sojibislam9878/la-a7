@@ -1,11 +1,31 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { ApiError } from "@/lib/api/client"
 import { paymentsApi } from "@/lib/api/payments"
 import { queryKeys } from "@/lib/query-keys"
+import { useAuthStore } from "@/stores/auth-store"
+import type { Paginated } from "@/types/api"
+import type { Payment, PaymentListQuery } from "@/types/payment"
 
 export const PAYMENT_POLL_INTERVAL_MS = 2000
 export const PAYMENT_POLL_LIMIT_MS = 60 * 1000
+
+export function useMyPayments(query: PaymentListQuery) {
+  const authenticated = useAuthStore((state) => state.status === "authenticated")
+
+  return useQuery({
+    queryKey: queryKeys.myPayments(query),
+    queryFn: async ({ signal }): Promise<Paginated<Payment>> => {
+      const result = await paymentsApi.listMine(query, signal)
+      return {
+        items: result.data,
+        meta: result.meta ?? { page: 1, limit: result.data.length, total: result.data.length, totalPages: 1 },
+      }
+    },
+    enabled: authenticated,
+    placeholderData: keepPreviousData,
+  })
+}
 
 export function useStartCheckout() {
   const queryClient = useQueryClient()
@@ -35,6 +55,7 @@ export function usePaymentStatus(sessionId: string | null, pollUntil: number | n
       if (payment.status !== "PENDING") {
         void queryClient.invalidateQueries({ queryKey: queryKeys.bookings })
         void queryClient.invalidateQueries({ queryKey: queryKeys.dashboard })
+        void queryClient.invalidateQueries({ queryKey: [...queryKeys.payments, "mine"] })
       }
       return payment
     },

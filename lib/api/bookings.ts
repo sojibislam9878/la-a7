@@ -16,4 +16,7 @@ export const bookingsApi = {
     authedRequest<Booking[]>(`/bookings/me${toQueryString(query)}`, { signal }),
   get: (id: string, signal?: AbortSignal) => authedRequest<Booking>(`/bookings/${id}`, { signal }),
   invoice: (id: string, signal?: AbortSignal) => authedRequest<BookingInvoice>(`/bookings/${id}/invoice`, { signal }),
+  cancel: (id: string, reason?: string) =>
+    authedRequest<Booking>(`/bookings/${id}/cancel`, { method: "PATCH", body: reason ? { reason } : {} }),
+  requestWithdrawal: (id: string) => authedRequest<Booking>(`/bookings/${id}/withdraw-request`, { method: "PATCH" }),
 }

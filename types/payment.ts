@@ -15,6 +15,13 @@ export type Payment = {
   createdAt: string
 }
 
+export type PaymentListQuery = {
+  status?: PaymentStatus
+  sortOrder?: "asc" | "desc"
+  page?: number
+  limit?: number
+}
+
 export type CheckoutSession = {
   paymentId: string
   sessionId: string
