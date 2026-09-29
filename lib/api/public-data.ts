@@ -15,10 +15,12 @@ export class PublicApiError extends Error {
   }
 }
 
-async function publicGet<T>(path: string, revalidate: number) {
+export const CROP_TYPES_TAG = "crop-types"
+
+async function publicGet<T>(path: string, revalidate: number, tags?: string[]) {
   const res = await fetch(`${env.apiBaseUrl}${path}`, {
     headers: { Accept: "application/json" },
-    next: { revalidate },
+    next: { revalidate, ...(tags ? { tags } : {}) },
   })
   const body = (await res.json().catch(() => null)) as ApiResponse<T> | null
 
@@ -72,6 +74,6 @@ export async function getWarehouseReviews(warehouseId: string, page = 1, limit =
 }
 
 export async function getCropTypes(): Promise<CropType[]> {
-  const body = await publicGet<CropType[]>("/crop-types", 3600)
+  const body = await publicGet<CropType[]>("/crop-types?limit=100", 3600, [CROP_TYPES_TAG])
   return body.data
 }

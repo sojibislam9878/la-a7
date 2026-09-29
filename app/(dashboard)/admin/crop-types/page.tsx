@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
-import { PagePlaceholder } from "@/components/dashboard/page-placeholder"
+import { CropTypesAdmin } from "@/components/admin/crop-types/crop-types-admin"
 
 export const metadata: Metadata = { title: "Crop types" }
 
 export default function AdminCropTypesPage() {
-  return <PagePlaceholder title="Crop types" description="Reference crops with ideal temperature and storage limits." />
+  return <CropTypesAdmin />
 }
