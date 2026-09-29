@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
-import { PagePlaceholder } from "@/components/dashboard/page-placeholder"
+import { AdminWarehouses } from "@/components/admin/warehouses/admin-warehouses"
 
-export const metadata: Metadata = { title: "Warehouses" }
+export const metadata: Metadata = { title: "Warehouse review" }
 
 export default function AdminWarehousesPage() {
-  return <PagePlaceholder title="Warehouses" description="Approve, reject or suspend warehouse listings." />
+  return <AdminWarehouses />
 }

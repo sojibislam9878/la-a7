@@ -1,4 +1,5 @@
 import type { AvailabilityParams } from "@/lib/api/availability"
+import type { AdminWarehouseQuery } from "@/types/admin"
 import type { BookingListQuery } from "@/types/booking"
 import type { PaymentListQuery } from "@/types/payment"
 import type { MyWarehouseListQuery } from "@/types/warehouse"
@@ -9,6 +10,7 @@ export const queryKeys = {
   ownerProfile: ["users", "me", "owner-profile"] as const,
   dashboard: ["users", "me", "dashboard"] as const,
   adminStats: ["admin", "stats"] as const,
+  adminWarehouses: (query: AdminWarehouseQuery) => ["admin", "warehouses", query] as const,
   bookings: ["bookings"] as const,
   myBookings: (query: BookingListQuery) => ["bookings", "mine", query] as const,
   warehouseBookings: (warehouseId: string, query: BookingListQuery) => ["bookings", "warehouse", warehouseId, query] as const,
