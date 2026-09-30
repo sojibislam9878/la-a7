@@ -1,4 +1,5 @@
-import type { BookingStatus } from "@/types/booking"
+import type { BookingStatus, PaymentStatus, QualityGrade } from "@/types/booking"
+import type { Payment } from "@/types/payment"
 import type { Role } from "@/types/user"
 import type { WarehouseStatus } from "@/types/warehouse"
 
@@ -103,6 +104,51 @@ export type AuditLogQuery = {
   entityId?: string
   actorId?: string
   action?: string
+  sortOrder?: "asc" | "desc"
+  page?: number
+  limit?: number
+}
+
+export type AdminPayment = Payment & {
+  refundable: boolean
+  booking: {
+    id: string
+    status: BookingStatus
+    cancelReason: string | null
+    farmer: { id: string; name: string; email: string }
+    warehouse: { id: string; name: string; district: string }
+  }
+}
+
+export type AdminPaymentQuery = {
+  status?: PaymentStatus
+  refundDue?: "true"
+  search?: string
+  sortOrder?: "asc" | "desc"
+  page?: number
+  limit?: number
+}
+
+export type Inspection = {
+  id: string
+  grade: QualityGrade
+  moisturePct: number | null
+  actualQtyKg: number
+  notes: string | null
+  inspectedAt: string
+  inspector: { id: string; name: string }
+  booking: {
+    id: string
+    lotCode: string
+    status: BookingStatus
+    quantityKg: number
+    farmer: { id: string; name: string }
+    warehouse: { id: string; name: string }
+  }
+}
+
+export type InspectionQuery = {
+  grade?: QualityGrade
   sortOrder?: "asc" | "desc"
   page?: number
   limit?: number

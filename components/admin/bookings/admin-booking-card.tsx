@@ -2,8 +2,8 @@ import { format, parseISO } from "date-fns"
 import { CalendarDaysIcon, PackageIcon, SnowflakeIcon, SproutIcon, UserRoundIcon, WarehouseIcon } from "lucide-react"
 
 import { InspectionDialog } from "@/components/admin/bookings/inspection-dialog"
+import { gradeToneClass } from "@/components/admin/inspections/grade-badge"
 import { StatusBadge } from "@/components/booking/status-badge"
-import { STATUS_TONE_CLASS } from "@/constants/booking-status"
 import { QUALITY_GRADE } from "@/constants/quality-grade"
 import { formatMoney, formatNumber } from "@/lib/format"
 import { cn } from "@/lib/utils"
@@ -36,7 +36,7 @@ export function AdminBookingCard({ booking, now }: { booking: Booking; now: numb
               <span
                 className={cn(
                   "inline-flex h-6 items-center rounded-full px-2.5 text-xs font-semibold",
-                  inspection.grade === "REJECTED" ? "bg-destructive/15 text-destructive" : STATUS_TONE_CLASS[QUALITY_GRADE[inspection.grade].tone]
+                  gradeToneClass(inspection.grade)
                 )}
               >
                 {QUALITY_GRADE[inspection.grade].label} · {formatNumber(inspection.actualQtyKg)} kg

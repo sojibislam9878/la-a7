@@ -6,6 +6,7 @@ import { ClipboardCheckIcon, Loader2Icon, TriangleAlertIcon } from "lucide-react
 import { Controller, useForm, useWatch } from "react-hook-form"
 import { RadioGroup as RadioGroupPrimitive } from "radix-ui"
 
+import { GradeMark } from "@/components/admin/inspections/grade-badge"
 import { inputClass } from "@/components/profile/account-form"
 import { Button } from "@/components/ui/button"
 import {
@@ -20,7 +21,6 @@ import {
 import { Field, FieldError, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { STATUS_TONE_CLASS } from "@/constants/booking-status"
 import { QUALITY_GRADE, QUALITY_GRADES } from "@/constants/quality-grade"
 import { useRecordInspection } from "@/hooks/use-admin-bookings"
 import { formatNumber } from "@/lib/format"
@@ -126,15 +126,7 @@ function InspectionForm({ booking, onDone }: { booking: Booking; onDone: () => v
                       value === "REJECTED" && "data-[state=checked]:border-destructive data-[state=checked]:bg-destructive/5"
                     )}
                   >
-                    <span
-                      className={cn(
-                        "flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold",
-                        value === "REJECTED" ? "bg-destructive/15 text-destructive" : STATUS_TONE_CLASS[meta.tone]
-                      )}
-                      aria-hidden
-                    >
-                      {meta.short}
-                    </span>
+                    <GradeMark grade={value} />
                     <span className="flex flex-col gap-0.5">
                       <span className="text-sm font-semibold">{meta.label}</span>
                       <span className="text-xs text-muted-foreground">{meta.description}</span>

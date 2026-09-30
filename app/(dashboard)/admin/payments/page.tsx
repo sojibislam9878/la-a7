@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
-import { PagePlaceholder } from "@/components/dashboard/page-placeholder"
+import { AdminPayments } from "@/components/admin/payments/admin-payments"
 
 export const metadata: Metadata = { title: "Payments" }
 
 export default function AdminPaymentsPage() {
-  return <PagePlaceholder title="Payments" description="Platform payments and refunds." />
+  return <AdminPayments />
 }

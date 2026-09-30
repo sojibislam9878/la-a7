@@ -1,5 +1,7 @@
 import { authedRequest } from "@/lib/api/authed"
 import type {
+  AdminPayment,
+  AdminPaymentQuery,
   AdminUser,
   AdminUserDetail,
   AdminUserQuery,
@@ -7,9 +9,12 @@ import type {
   AdminWarehouseQuery,
   AuditLogEntry,
   AuditLogQuery,
+  Inspection,
+  InspectionQuery,
   PlatformStats,
 } from "@/types/admin"
 import type { Booking, BookingListQuery, QualityGrade } from "@/types/booking"
+import type { Payment } from "@/types/payment"
 import type { Role } from "@/types/user"
 import type { WarehouseStatus } from "@/types/warehouse"
 
@@ -50,6 +55,12 @@ export const adminApi = {
     authedRequest<Booking[]>(`/admin/bookings${toQueryString(query)}`, { signal }),
   recordInspection: (bookingId: string, payload: InspectionPayload) =>
     authedRequest<InspectionRecord>(`/admin/bookings/${bookingId}/inspection`, { method: "POST", body: payload }),
+  inspections: (query: InspectionQuery, signal?: AbortSignal) =>
+    authedRequest<Inspection[]>(`/inspections${toQueryString(query)}`, { signal }),
+  payments: (query: AdminPaymentQuery, signal?: AbortSignal) =>
+    authedRequest<AdminPayment[]>(`/admin/payments${toQueryString(query)}`, { signal }),
+  refundPayment: (id: string, reason?: string) =>
+    authedRequest<Payment>(`/payments/${id}/refund`, { method: "POST", body: reason ? { reason } : {} }),
 }
 
 export type InspectionPayload = {
@@ -59,20 +70,4 @@ export type InspectionPayload = {
   notes?: string
 }
 
-export type InspectionRecord = {
-  id: string
-  grade: QualityGrade
-  moisturePct: number | null
-  actualQtyKg: number
-  notes: string | null
-  inspectedAt: string
-  inspector: { id: string; name: string }
-  booking: {
-    id: string
-    lotCode: string
-    status: string
-    quantityKg: number
-    farmer: { id: string; name: string }
-    warehouse: { id: string; name: string }
-  }
-}
+export type InspectionRecord = Inspection

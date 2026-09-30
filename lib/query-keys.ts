@@ -1,6 +1,6 @@
 import type { AvailabilityParams } from "@/lib/api/availability"
 import type { CropTypeListQuery } from "@/lib/api/crop-types"
-import type { AdminUserQuery, AdminWarehouseQuery, AuditLogQuery } from "@/types/admin"
+import type { AdminPaymentQuery, AdminUserQuery, AdminWarehouseQuery, AuditLogQuery, InspectionQuery } from "@/types/admin"
 import type { BookingListQuery } from "@/types/booking"
 import type { PaymentListQuery } from "@/types/payment"
 import type { MyWarehouseListQuery } from "@/types/warehouse"
@@ -15,6 +15,8 @@ export const queryKeys = {
   adminUsers: (query: AdminUserQuery) => ["admin", "users", "list", query] as const,
   adminUser: (id: string) => ["admin", "users", "detail", id] as const,
   auditLogs: (query: AuditLogQuery) => ["admin", "audit-logs", query] as const,
+  inspections: (query: InspectionQuery) => ["admin", "inspections", query] as const,
+  adminPayments: (query: AdminPaymentQuery) => ["payments", "admin", query] as const,
   cropTypes: (query: CropTypeListQuery) => ["crop-types", query] as const,
   adminBookings: (query: BookingListQuery) => ["bookings", "admin", query] as const,
   bookings: ["bookings"] as const,
