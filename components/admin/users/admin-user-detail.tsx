@@ -31,14 +31,14 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-import { ROLE_LABEL } from "@/constants/routes"
+import { auditActionLabel } from "@/constants/audit-log"
 import { useAdminUser, useAuditLogs } from "@/hooks/use-admin-users"
 import { ApiError } from "@/lib/api/client"
 import { getErrorMessage } from "@/lib/api/form-errors"
+import { describeAudit } from "@/lib/audit-describe"
 import { formatNumber, initials } from "@/lib/format"
 import { useAuthStore } from "@/stores/auth-store"
-import type { AdminUserDetail as Detail, AuditLogEntry } from "@/types/admin"
-import type { Role } from "@/types/user"
+import type { AdminUserDetail as Detail } from "@/types/admin"
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -275,32 +275,24 @@ function ProfileCard({ user }: { user: Detail }) {
   )
 }
 
-const ACTION_LABEL: Record<string, string> = {
-  USER_BANNED: "Banned",
-  USER_UNBANNED: "Unbanned",
-  USER_ROLE_CHANGED: "Role changed",
-}
-
-function describe(entry: AuditLogEntry) {
-  const before = (entry.before ?? {}) as Record<string, unknown>
-  const after = (entry.after ?? {}) as Record<string, unknown>
-  const reason = typeof after.reason === "string" ? after.reason : null
-  const role = (value: unknown) => (typeof value === "string" && value in ROLE_LABEL ? ROLE_LABEL[value as Role] : String(value))
-  const detail =
-    entry.action === "USER_ROLE_CHANGED" && before.role && after.role ? `${role(before.role)} → ${role(after.role)}` : null
-  return { title: ACTION_LABEL[entry.action] ?? entry.action.replaceAll("_", " ").toLowerCase(), detail, reason }
-}
-
 function ActivityCard({ userId }: { userId: string }) {
   const logs = useAuditLogs({ entityType: "User", entityId: userId, sortOrder: "desc", limit: 10 })
 
   return (
     <section aria-labelledby="activity-heading" className={card}>
-      <div className="flex items-center gap-2">
-        <HistoryIcon className="size-5 text-primary" aria-hidden />
-        <h2 id="activity-heading" className="font-display text-xl font-semibold">
-          Admin actions on this account
-        </h2>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <HistoryIcon className="size-5 text-primary" aria-hidden />
+          <h2 id="activity-heading" className="font-display text-xl font-semibold">
+            Admin actions on this account
+          </h2>
+        </div>
+        <Link
+          href={`/admin/audit-logs?entity=${userId}`}
+          className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+        >
+          Full history
+        </Link>
       </div>
       {logs.isError ? (
         <p className="text-sm text-destructive">{getErrorMessage(logs.error)}</p>
@@ -311,7 +303,8 @@ function ActivityCard({ userId }: { userId: string }) {
       ) : (
         <ol className="flex flex-col gap-3">
           {logs.data.items.map((entry) => {
-            const { title, detail, reason } = describe(entry)
+            const title = auditActionLabel(entry.action)
+            const { detail, reason } = describeAudit(entry)
             return (
               <li key={entry.id} className="flex flex-col gap-0.5 border-l-2 border-primary/30 pl-3">
                 <p className="text-sm">
