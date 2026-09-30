@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 import { DISTRICTS } from "@/constants/districts"
-import { BANGLADESHI_PHONE } from "@/schemas/auth"
+import { BANGLADESHI_PHONE, passwordSchema } from "@/schemas/auth"
 
 const KEEP_MESSAGE = "This can be changed but not removed."
 
@@ -108,3 +108,21 @@ export const ownerProfileSchema = z.object({
 })
 
 export type OwnerProfileValues = z.infer<typeof ownerProfileSchema>
+
+export const passwordFormSchema = (hasPassword: boolean) =>
+  z
+    .object({
+      currentPassword: hasPassword ? z.string().min(1, { error: "Enter your current password" }) : z.string(),
+      newPassword: passwordSchema,
+      confirmPassword: z.string().min(1, { error: "Please confirm your new password" }),
+    })
+    .refine((values) => values.newPassword === values.confirmPassword, {
+      error: "Passwords don't match",
+      path: ["confirmPassword"],
+    })
+    .refine((values) => !hasPassword || values.newPassword !== values.currentPassword, {
+      error: "Choose a password different from your current one",
+      path: ["newPassword"],
+    })
+
+export type PasswordFormValues = z.infer<ReturnType<typeof passwordFormSchema>>

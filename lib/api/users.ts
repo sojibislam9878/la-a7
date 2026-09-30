@@ -15,6 +15,14 @@ export const usersApi = {
       body: password ? { password } : {},
       shouldRefresh: (error) => !/password/i.test(error.message),
     }),
+  changePassword: (currentPassword: string, newPassword: string) =>
+    authedRequest<null>("/auth/change-password", {
+      method: "POST",
+      body: { currentPassword, newPassword },
+      shouldRefresh: (error) => !/password/i.test(error.message),
+    }),
+  setPassword: (newPassword: string) =>
+    authedRequest<null>("/auth/set-password", { method: "POST", body: { newPassword } }),
   getDashboard: () => authedRequest<DashboardSummary>("/users/me/dashboard"),
 
   getFarmerProfile: (signal?: AbortSignal) => authedRequest<FarmerProfile>("/users/me/farmer-profile", { signal }),

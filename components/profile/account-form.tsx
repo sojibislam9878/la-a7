@@ -14,6 +14,12 @@ import type { UpdateMePayload } from "@/lib/api/users"
 import { type AccountValues, createAccountSchema } from "@/schemas/profile"
 import type { User } from "@/types/user"
 
+const PHONE_HINT: Record<User["role"], string> = {
+  FARMER: "Warehouse owners use it to reach you about your lots.",
+  WAREHOUSE_OWNER: "Farmers and admins use it to reach you about bookings.",
+  ADMIN: "Other admins use it to reach you about platform issues.",
+}
+
 export const inputClass = "h-10 rounded-xl border-soil/15 bg-card"
 
 export function AccountForm({ user }: { user: User }) {
@@ -75,7 +81,7 @@ export function AccountForm({ user }: { user: User }) {
             aria-invalid={!!errors.phone}
             {...register("phone")}
           />
-          <FieldDescription>Warehouse owners use it to reach you about your lots.</FieldDescription>
+          <FieldDescription>{PHONE_HINT[user.role]}</FieldDescription>
           <FieldError errors={[errors.phone]} />
         </Field>
 

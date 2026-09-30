@@ -6,6 +6,7 @@ import { CalendarIcon, type LucideIcon, MailIcon, PhoneIcon, ShieldCheckIcon } f
 import { PageHeader } from "@/components/dashboard/page-header"
 import { AccountForm } from "@/components/profile/account-form"
 import { DeleteAccount } from "@/components/profile/delete-account"
+import { PasswordForm } from "@/components/profile/password-form"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ROLE_LABEL } from "@/constants/routes"
@@ -26,7 +27,7 @@ export function ProfileSection({
   id: string
   title: string
   description: string
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
 }) {
   return (
@@ -88,11 +89,13 @@ export function ProfileView({
   description,
   facts = [],
   canDelete = true,
+  deleteNote,
   children,
 }: {
   description: string
   facts?: ProfileFact[]
   canDelete?: boolean
+  deleteNote?: string
   children?: React.ReactNode
 }) {
   const user = useAuthStore((state) => (state.status === "authenticated" ? state.user : null))
@@ -117,7 +120,14 @@ export function ProfileView({
               <AccountForm key={`${user.name}|${user.phone}`} user={user} />
             </ProfileSection>
             {children}
-            {canDelete && (
+            <ProfileSection
+              id="password-heading"
+              title="Password"
+              description="Change the password you use to log in with your email."
+            >
+              <PasswordForm />
+            </ProfileSection>
+            {canDelete ? (
               <ProfileSection
                 id="danger-heading"
                 title="Danger zone"
@@ -126,6 +136,10 @@ export function ProfileView({
               >
                 <DeleteAccount />
               </ProfileSection>
+            ) : (
+              deleteNote && (
+                <ProfileSection id="danger-heading" title="Account removal" description={deleteNote} />
+              )
             )}
           </div>
         </div>

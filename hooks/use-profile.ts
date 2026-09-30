@@ -77,6 +77,24 @@ export function useDeleteAccount() {
   })
 }
 
+export function useSavePassword() {
+  return useMutation({
+    mutationKey: ["users", "password"],
+    mutationFn: async ({ currentPassword, newPassword }: { currentPassword?: string; newPassword: string }) => {
+      if (currentPassword === undefined) await usersApi.setPassword(newPassword)
+      else await usersApi.changePassword(currentPassword, newPassword)
+    },
+    onSuccess: (_data, { currentPassword }) => {
+      toast.success(currentPassword === undefined ? "Password set" : "Password changed", {
+        description:
+          currentPassword === undefined
+            ? "You can now log in with your email and password as well as Google."
+            : "Use the new password next time you log in.",
+      })
+    },
+  })
+}
+
 export function useOwnerProfile() {
   const authenticated = useAuthStore((state) => state.status === "authenticated")
 
