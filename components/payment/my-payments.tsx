@@ -213,7 +213,7 @@ export function MyPayments() {
             {formatNumber(data.meta.total)} {data.meta.total === 1 ? "payment" : "payments"}
           </p>
 
-          <div className="hidden overflow-hidden rounded-2xl border border-soil/10 bg-card md:block">
+          <div className="hidden overflow-x-auto rounded-2xl border border-soil/10 bg-card lg:block">
             <table className="w-full text-sm">
               <thead className="bg-cream/60 dark:bg-muted/30">
                 <tr className="text-left text-xs text-muted-foreground uppercase">
@@ -257,7 +257,7 @@ export function MyPayments() {
             </table>
           </div>
 
-          <ul className="flex flex-col gap-3 md:hidden">
+          <ul className="flex flex-col gap-3 lg:hidden">
             {data.items.map((payment) => (
               <li key={payment.id} className="flex flex-col gap-3 rounded-2xl border border-soil/10 bg-card p-4">
                 <div className="flex items-start justify-between gap-3">

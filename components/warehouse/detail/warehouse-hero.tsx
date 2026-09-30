@@ -48,7 +48,7 @@ export function WarehouseHero({ warehouse }: { warehouse: WarehouseDetail }) {
       <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <nav aria-label="Breadcrumb">
           <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
-            <li>
+            <li className="shrink-0 whitespace-nowrap">
               <Link href="/warehouses" className="hover:text-foreground">
                 Find storage
               </Link>

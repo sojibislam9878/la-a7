@@ -13,11 +13,11 @@ export function Navbar() {
           <Logo />
         </div>
 
-        <nav aria-label="Main" className="mx-auto hidden md:block">
+        <nav aria-label="Main" className="mx-auto hidden lg:block">
           <NavLinks />
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 md:ml-0">
+        <div className="ml-auto flex items-center gap-2 lg:ml-0">
           <ThemeToggle />
           <NavAuthActions />
         </div>

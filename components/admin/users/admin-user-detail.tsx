@@ -129,7 +129,7 @@ function UserView({ id }: { id: string }) {
             Users
           </Link>
         </Button>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex min-w-0 items-center gap-4">
             <Avatar className="size-14">
               <AvatarFallback className="bg-harvest font-display text-lg font-semibold text-harvest-foreground">
@@ -137,7 +137,7 @@ function UserView({ id }: { id: string }) {
               </AvatarFallback>
             </Avatar>
             <div className="min-w-0">
-              <h1 className="truncate font-display text-2xl font-semibold tracking-tight sm:text-3xl">{data.name}</h1>
+              <h1 className="font-display break-words text-2xl font-semibold tracking-tight sm:text-3xl">{data.name}</h1>
               <div className="mt-1 flex flex-wrap items-center gap-2">
                 <RoleBadge role={data.role} />
                 <AccountStatusBadge user={data} />
@@ -150,7 +150,7 @@ function UserView({ id }: { id: string }) {
               {locked}
             </p>
           ) : (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex shrink-0 flex-wrap gap-2">
               <RoleDialog user={data} />
               <BanDialog user={data} />
             </div>

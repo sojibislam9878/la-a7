@@ -122,7 +122,7 @@ export function BookingInvoiceView({ id }: { id: string }) {
         </section>
 
         <div className="overflow-x-auto py-6">
-          <table className="w-full min-w-[28rem] text-sm">
+          <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-soil/10 text-left text-xs text-muted-foreground uppercase">
                 <th scope="col" className="pb-2 font-semibold">Description</th>
@@ -136,7 +136,7 @@ export function BookingInvoiceView({ id }: { id: string }) {
                     <p className="font-medium">{line.description}</p>
                     <p className="text-xs text-muted-foreground">{line.detail}</p>
                   </td>
-                  <td className="py-3 text-right font-medium tabular-nums">{formatMoney(line.amount)}</td>
+                  <td className="py-3 pl-4 text-right font-medium whitespace-nowrap tabular-nums">{formatMoney(line.amount)}</td>
                 </tr>
               ))}
             </tbody>
@@ -145,7 +145,7 @@ export function BookingInvoiceView({ id }: { id: string }) {
                 <th scope="row" className="pt-4 text-right font-medium text-muted-foreground">
                   {settled ? "Total" : "Estimated total"}
                 </th>
-                <td className="pt-4 text-right font-semibold tabular-nums">{formatMoney(total)}</td>
+                <td className="pt-4 pl-4 text-right font-semibold whitespace-nowrap tabular-nums">{formatMoney(total)}</td>
               </tr>
               {paid && (
                 <tr>
@@ -153,7 +153,7 @@ export function BookingInvoiceView({ id }: { id: string }) {
                     {paid.status === "REFUNDED" ? "Paid, then refunded" : "Paid"}
                     {paid.paidAt ? ` on ${format(parseISO(paid.paidAt), "MMM d, yyyy")}` : ""}
                   </th>
-                  <td className="pt-2 text-right tabular-nums">−{formatMoney(paid.amountBdt)}</td>
+                  <td className="pt-2 pl-4 text-right whitespace-nowrap tabular-nums">−{formatMoney(paid.amountBdt)}</td>
                 </tr>
               )}
               <tr>
@@ -162,7 +162,7 @@ export function BookingInvoiceView({ id }: { id: string }) {
                 </th>
                 <td
                   className={cn(
-                    "pt-4 text-right text-2xl font-bold tabular-nums",
+                    "pt-4 pl-4 text-right text-2xl font-bold whitespace-nowrap tabular-nums",
                     balanceBdt > 0 ? "text-foreground" : "text-primary"
                   )}
                 >

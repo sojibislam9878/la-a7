@@ -127,7 +127,7 @@ export function RoleOverview({ role }: { role: Role }) {
         <h2 id="quick-actions" className="text-lg font-semibold">
           Quick actions
         </h2>
-        <ul className="grid gap-4 md:grid-cols-3">
+        <ul className="grid gap-4 xl:grid-cols-3">
           {copy.actions.map((action) => (
             <li key={action.href}>
               <Link

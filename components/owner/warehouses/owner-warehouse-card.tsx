@@ -49,7 +49,7 @@ function Stat({ icon: Icon, label, value }: { icon: LucideIcon; label: string; v
       <Icon className="size-4 shrink-0 text-primary" aria-hidden />
       <div className="min-w-0">
         <dt className="text-xs text-muted-foreground">{label}</dt>
-        <dd className="truncate text-sm font-semibold">{value}</dd>
+        <dd className="text-sm font-semibold break-words">{value}</dd>
       </div>
     </div>
   )
@@ -66,7 +66,7 @@ export function OwnerWarehouseCard({ warehouse }: { warehouse: Warehouse }) {
       : `${warehouse.avgRating.toFixed(1)} (${warehouse.reviewCount})`
 
   return (
-    <article className="flex h-full flex-col gap-4 rounded-3xl border border-soil/10 bg-card p-5 sm:p-6">
+    <article className="@container flex h-full flex-col gap-4 rounded-3xl border border-soil/10 bg-card p-5 sm:p-6">
       <header className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-col gap-1.5">
           <div className="flex flex-wrap items-center gap-2">
@@ -119,7 +119,7 @@ export function OwnerWarehouseCard({ warehouse }: { warehouse: Warehouse }) {
 
       <p className={cn("rounded-xl px-3 py-2 text-xs font-medium", STATUS_TONE_CLASS[meta.tone])}>{meta.hint}</p>
 
-      <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-2 @xl:grid-cols-4">
         <Stat
           icon={DoorOpenIcon}
           label="Active chambers"

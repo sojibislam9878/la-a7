@@ -92,22 +92,22 @@ function scaleFor(items: CropType[]) {
 type Scale = ReturnType<typeof scaleFor>
 
 const ROW_GRID =
-  "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)_7.5rem_6.5rem_5.5rem]"
+  "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 lg:grid-cols-[minmax(0,11rem)_minmax(0,1fr)_7.5rem_6.5rem_5.5rem]"
 
 function Axis({ scale }: { scale: Scale }) {
   return (
     <div className={cn(ROW_GRID, "px-4 pb-1 text-xs text-muted-foreground")} aria-hidden>
-      <span className="hidden md:block">Crop</span>
-      <div className="relative col-span-2 h-4 md:col-span-1">
+      <span className="hidden lg:block">Crop</span>
+      <div className="relative col-span-2 h-4 lg:col-span-1">
         {scale.ticks.map((tick) => (
           <span key={tick} className="absolute -translate-x-1/2 tabular-nums" style={{ left: `${scale.at(tick)}%` }}>
             {tick}°
           </span>
         ))}
       </div>
-      <span className="hidden md:block">Ideal range</span>
-      <span className="hidden md:block">Max storage</span>
-      <span className="hidden md:block" />
+      <span className="hidden lg:block">Ideal range</span>
+      <span className="hidden lg:block">Max storage</span>
+      <span className="hidden lg:block" />
     </div>
   )
 }
@@ -118,7 +118,7 @@ function RangeTrack({ crop, scale }: { crop: CropType; scale: Scale }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <div className="relative col-span-2 h-6 md:col-span-1" role="img" aria-label={`${crop.name}: ${formatTempRange(crop.idealMinTempC, crop.idealMaxTempC)}`}>
+        <div className="relative col-span-2 h-6 lg:col-span-1" role="img" aria-label={`${crop.name}: ${formatTempRange(crop.idealMinTempC, crop.idealMaxTempC)}`}>
           <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-border" />
           <div className="absolute top-0 bottom-0 w-px bg-muted-foreground/40" style={{ left: `${scale.at(0)}%` }} />
           <div
@@ -141,7 +141,7 @@ function CropRow({ crop, scale }: { crop: CropType; scale: Scale }) {
   return (
     <li className={cn(ROW_GRID, "rounded-2xl px-4 py-3 transition-colors hover:bg-cream/50 dark:hover:bg-muted/30")}>
       <p className="truncate font-semibold">{crop.name}</p>
-      <div className="flex justify-end gap-1 md:order-last">
+      <div className="flex justify-end gap-1 lg:order-last">
         <Button variant="ghost" size="icon-sm" className="rounded-full" aria-label={`Edit ${crop.name}`} onClick={() => setEditing(true)}>
           <PencilIcon />
         </Button>
@@ -169,7 +169,7 @@ function CropRow({ crop, scale }: { crop: CropType; scale: Scale }) {
       </div>
       <RangeTrack crop={crop} scale={scale} />
       <p className="text-sm tabular-nums">{formatTempRange(crop.idealMinTempC, crop.idealMaxTempC)}</p>
-      <p className="text-right text-sm text-muted-foreground tabular-nums md:text-left">
+      <p className="text-right text-sm text-muted-foreground tabular-nums lg:text-left">
         {formatNumber(crop.maxStorageDays)} days
       </p>
       <CropTypeDialog crop={crop} open={editing} onOpenChange={setEditing} />

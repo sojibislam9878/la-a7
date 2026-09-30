@@ -60,8 +60,8 @@ export function MyWarehouses() {
       />
       <WarehouseFormDialog open={adding} onOpenChange={setAdding} />
 
-      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <nav aria-label="Filter by status" className="-mx-1 min-w-0 overflow-x-auto px-1 pb-1 sm:flex-1">
+      <div className="flex min-w-0 flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+        <nav aria-label="Filter by status" className="-mx-1 min-w-0 overflow-x-auto px-1 pb-1 xl:flex-1">
           <ul className="flex w-max gap-1.5">
             {WAREHOUSE_STATUS_FILTERS.map((filter) => {
               const active = (state.status ?? "ALL") === filter.value

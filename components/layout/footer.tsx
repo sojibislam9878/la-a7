@@ -38,8 +38,8 @@ export function Footer() {
   return (
     <footer className="border-t bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
-          <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
+          <div className="col-span-2 flex flex-col gap-4 sm:col-span-3 lg:col-span-1">
             <Logo />
             <p className="max-w-xs text-sm text-muted-foreground">
               The booking and settlement layer for cold storage in Bangladesh. Reserve capacity by the
