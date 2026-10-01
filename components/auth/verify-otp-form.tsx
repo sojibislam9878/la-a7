@@ -124,7 +124,7 @@ export function VerifyOtpForm({ defaultEmail, codeNotSent }: { defaultEmail: str
             toast.info(error.message)
             return
           }
-          toast.error("Could not send a new code", { description: getErrorMessage(error) })
+          toast.error("Couldn't send a new code", { description: getErrorMessage(error) })
         },
       }
     )

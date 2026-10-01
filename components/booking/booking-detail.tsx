@@ -191,12 +191,12 @@ function BookingDetailView({ id }: { id: string }) {
             </div>
             <dl className="grid gap-3 sm:grid-cols-2">
               {details.map((item) => (
-                <div key={item.label} className="flex items-start gap-3 rounded-2xl bg-cream/60 p-3 dark:bg-muted/40">
-                  <item.icon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                  <div className="min-w-0">
-                    <dt className="text-xs text-muted-foreground">{item.label}</dt>
-                    <dd className="font-medium">{item.value}</dd>
-                  </div>
+                <div key={item.label} className="relative min-w-0 rounded-2xl bg-cream/60 dark:bg-muted/40 py-3 pr-3 pl-10">
+                  <dt className="text-xs text-muted-foreground">
+                    <item.icon className="absolute top-[0.875rem] left-3 size-4 text-primary" aria-hidden />
+                    {item.label}
+                  </dt>
+                  <dd className="font-medium">{item.value}</dd>
                 </div>
               ))}
             </dl>

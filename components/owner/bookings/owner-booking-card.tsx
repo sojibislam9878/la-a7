@@ -43,7 +43,7 @@ export function OwnerBookingCard({ booking, now }: { booking: Booking; now: numb
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex min-w-0 flex-col gap-1.5">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-mono text-sm font-semibold">{booking.lotCode}</h3>
+            <h2 className="font-mono text-sm font-semibold">{booking.lotCode}</h2>
             <StatusBadge booking={booking} now={now} />
             {holding && booking.holdExpiresAt && (
               <HoldCountdown expiresAt={booking.holdExpiresAt} className="text-sky-700 dark:text-sky-300" />
@@ -76,12 +76,12 @@ export function OwnerBookingCard({ booking, now }: { booking: Booking; now: numb
 
       <dl className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         {details.map((item) => (
-          <div key={item.label} className="flex items-start gap-2 rounded-xl bg-cream/60 px-3 py-2 dark:bg-muted/40">
-            <item.icon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-            <div className="min-w-0">
-              <dt className="text-xs text-muted-foreground">{item.label}</dt>
-              <dd className="text-sm font-medium">{item.value}</dd>
-            </div>
+          <div key={item.label} className="relative min-w-0 rounded-xl bg-cream/60 py-2 dark:bg-muted/40 pr-3 pl-9">
+            <dt className="text-xs text-muted-foreground">
+              <item.icon className="absolute top-[0.625rem] left-3 size-4 text-primary" aria-hidden />
+              {item.label}
+            </dt>
+            <dd className="text-sm font-medium">{item.value}</dd>
           </div>
         ))}
       </dl>

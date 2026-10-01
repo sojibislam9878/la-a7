@@ -16,14 +16,14 @@ export function BookingCard({ booking, now }: { booking: Booking; now: number })
     <article className="group relative flex flex-col gap-4 rounded-2xl border border-soil/10 bg-card p-5 transition-shadow hover:shadow-md hover:shadow-primary/5 sm:flex-row sm:items-center">
       <div className="flex min-w-0 flex-1 flex-col gap-3">
         <div className="flex flex-wrap items-center gap-2">
-          <h3 className="font-mono text-sm font-semibold">
+          <h2 className="font-mono text-sm font-semibold">
             <Link
               href={`/farmer/bookings/${booking.id}`}
               className="after:absolute after:inset-0 after:rounded-[inherit] focus-visible:outline-none"
             >
               {booking.lotCode}
             </Link>
-          </h3>
+          </h2>
           <StatusBadge booking={booking} now={now} />
           {awaitingPayment && booking.holdExpiresAt && (
             <HoldCountdown expiresAt={booking.holdExpiresAt} className="text-sky-700 dark:text-sky-300" />

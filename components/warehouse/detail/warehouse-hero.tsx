@@ -48,19 +48,19 @@ export function WarehouseHero({ warehouse }: { warehouse: WarehouseDetail }) {
       <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <nav aria-label="Breadcrumb">
           <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
-            <li className="shrink-0 whitespace-nowrap">
+            <li className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
               <Link href="/warehouses" className="hover:text-foreground">
                 Find storage
               </Link>
+              <ChevronRightIcon className="size-3.5" aria-hidden />
             </li>
-            <ChevronRightIcon className="size-3.5" aria-hidden />
-            <li>
+            <li className="flex shrink-0 items-center gap-1.5">
               <Link href={`/warehouses?district=${encodeURIComponent(warehouse.district)}`} className="hover:text-foreground">
                 {warehouse.district}
               </Link>
+              <ChevronRightIcon className="size-3.5" aria-hidden />
             </li>
-            <ChevronRightIcon className="size-3.5" aria-hidden />
-            <li aria-current="page" className="truncate text-foreground">
+            <li aria-current="page" className="min-w-0 truncate text-foreground">
               {warehouse.name}
             </li>
           </ol>

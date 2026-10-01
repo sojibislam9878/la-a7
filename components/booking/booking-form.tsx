@@ -354,6 +354,10 @@ export function BookingForm({
               <p className={overCapacity ? "text-harvest" : "text-forest-foreground/80"}>
                 {formatKg(chamberFree.availableKg)} free in chamber {chamberFree.name}
               </p>
+            ) : availability.isError ? (
+              <p className="text-forest-foreground/80">
+                Couldn&apos;t check free space right now. You can still send the request; the owner confirms it.
+              </p>
             ) : null}
           </div>
 

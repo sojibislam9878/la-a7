@@ -45,12 +45,12 @@ import type { Warehouse } from "@/types/warehouse"
 
 function Stat({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
-    <div className="flex items-center gap-2.5 rounded-xl bg-cream/60 px-3 py-2 dark:bg-muted/40">
-      <Icon className="size-4 shrink-0 text-primary" aria-hidden />
-      <div className="min-w-0">
-        <dt className="text-xs text-muted-foreground">{label}</dt>
-        <dd className="text-sm font-semibold break-words">{value}</dd>
-      </div>
+    <div className="relative min-w-0 rounded-xl bg-cream/60 py-2 dark:bg-muted/40 pr-3 pl-[2.375rem]">
+      <dt className="text-xs text-muted-foreground">
+        <Icon className="absolute top-1/2 -translate-y-1/2 left-3 size-4 text-primary" aria-hidden />
+        {label}
+      </dt>
+      <dd className="text-sm font-semibold break-words">{value}</dd>
     </div>
   )
 }

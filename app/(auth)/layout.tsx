@@ -6,6 +6,7 @@ import { FarmScene } from "@/components/auth/farm-scene"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { Leaf } from "@/components/shared/leaf"
 import { Logo } from "@/components/shared/logo"
+import { MAIN_CONTENT_ID } from "@/components/shared/skip-link"
 import { Button } from "@/components/ui/button"
 
 const HIGHLIGHTS = [
@@ -87,7 +88,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             </div>
           </header>
 
-          <main className="flex flex-1 items-center justify-center px-4 pt-4 pb-12 sm:px-8">
+          <main id={MAIN_CONTENT_ID} tabIndex={-1} className="flex flex-1 items-center justify-center px-4 pt-4 pb-12 outline-none sm:px-8">
             <div className="relative w-full max-w-xl">
               <Leaf className="absolute -top-8 -left-6 size-16 -rotate-12 text-primary/30 sm:-left-10" />
               <Leaf className="absolute -right-5 -bottom-8 size-14 rotate-160 text-harvest/50 sm:-right-8" />

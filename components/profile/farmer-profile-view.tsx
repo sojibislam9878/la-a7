@@ -8,8 +8,9 @@ import { useFarmerProfile } from "@/hooks/use-profile"
 
 export function FarmerProfileView() {
   const farmer = useFarmerProfile()
-  const location =
-    farmer.data === undefined
+  const location = farmer.isError
+    ? "Couldn't load"
+    : farmer.data === undefined
       ? "…"
       : farmer.data === null
         ? "Not added"

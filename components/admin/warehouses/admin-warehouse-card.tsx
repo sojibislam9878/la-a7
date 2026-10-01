@@ -24,12 +24,12 @@ import type { AdminWarehouse } from "@/types/admin"
 
 function Fact({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
-    <div className="flex min-w-0 items-start gap-2">
-      <Icon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-      <div className="min-w-0">
-        <dt className="text-xs text-muted-foreground">{label}</dt>
-        <dd className="truncate text-sm font-medium">{value}</dd>
-      </div>
+    <div className="relative min-w-0 pl-6">
+      <dt className="text-xs text-muted-foreground">
+        <Icon className="absolute top-[0.125rem] left-0 size-4 text-primary" aria-hidden />
+        {label}
+      </dt>
+      <dd className="truncate text-sm font-medium">{value}</dd>
     </div>
   )
 }

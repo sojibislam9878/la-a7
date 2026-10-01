@@ -34,82 +34,84 @@ export function AppSidebar({ role }: { role: Role }) {
 
   return (
     <Sidebar collapsible="icon" variant="inset">
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild tooltip="AgroStore home">
-              <Link href="/" onClick={closeOnMobile}>
-                <span className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <SnowflakeIcon className="size-4" aria-hidden />
-                </span>
-                <span className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">
-                    Agro<span className="text-primary">Store</span>
+      <nav aria-label="Workspace" className="flex min-h-0 flex-1 flex-col">
+        <SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton size="lg" asChild tooltip="AgroStore home">
+                <Link href="/" onClick={closeOnMobile}>
+                  <span className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                    <SnowflakeIcon className="size-4" aria-hidden />
                   </span>
-                  <span className="text-xs text-muted-foreground">{ROLE_LABEL[role]} workspace</span>
-                </span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+                  <span className="flex flex-col gap-0.5 leading-none">
+                    <span className="font-semibold">
+                      Agro<span className="text-primary">Store</span>
+                    </span>
+                    <span className="text-xs text-muted-foreground">{ROLE_LABEL[role]} workspace</span>
+                  </span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
 
-      <SidebarContent>
-        {DASHBOARD_NAV[role].map((group) => (
-          <SidebarGroup key={group.label}>
-            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {group.items.map((item) => {
-                  const active = isDashboardItemActive(pathname, item)
-                  if (onboarding && !isOwnerUngatedPath(item.href)) {
+        <SidebarContent>
+          {DASHBOARD_NAV[role].map((group) => (
+            <SidebarGroup key={group.label}>
+              <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {group.items.map((item) => {
+                    const active = isDashboardItemActive(pathname, item)
+                    if (onboarding && !isOwnerUngatedPath(item.href)) {
+                      return (
+                        <SidebarMenuItem key={item.href}>
+                          <SidebarMenuButton
+                            disabled
+                            aria-disabled
+                            tooltip={`${item.label} unlocks after your business profile`}
+                            className="opacity-60"
+                          >
+                            <item.icon aria-hidden />
+                            <span>{item.label}</span>
+                            <LockIcon className="ml-auto size-3.5!" aria-label="Locked" />
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      )
+                    }
                     return (
                       <SidebarMenuItem key={item.href}>
-                        <SidebarMenuButton
-                          disabled
-                          aria-disabled
-                          tooltip={`${item.label} unlocks after your business profile`}
-                          className="opacity-60"
-                        >
-                          <item.icon aria-hidden />
-                          <span>{item.label}</span>
-                          <LockIcon className="ml-auto size-3.5!" aria-label="Locked" />
+                        <SidebarMenuButton asChild isActive={active} tooltip={item.label}>
+                          <Link href={item.href} aria-current={active ? "page" : undefined} onClick={closeOnMobile}>
+                            <item.icon aria-hidden />
+                            <span>{item.label}</span>
+                          </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     )
-                  }
-                  return (
-                    <SidebarMenuItem key={item.href}>
-                      <SidebarMenuButton asChild isActive={active} tooltip={item.label}>
-                        <Link href={item.href} aria-current={active ? "page" : undefined} onClick={closeOnMobile}>
-                          <item.icon aria-hidden />
-                          <span>{item.label}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )
-                })}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
-      </SidebarContent>
+                  })}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))}
+        </SidebarContent>
 
-      <SidebarFooter>
-        <div className="relative overflow-hidden rounded-xl bg-forest p-3 text-forest-foreground group-data-[collapsible=icon]:hidden">
-          <Leaf className="absolute -right-2 -bottom-3 size-14 rotate-12 text-forest-foreground/15" />
-          <p className="text-sm font-semibold">Harvest season?</p>
-          <p className="mt-0.5 text-xs text-forest-foreground/75">Book capacity early, chambers fill up fast.</p>
-        </div>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton tooltip="Log out" onClick={() => logout.mutate()} disabled={logout.isPending}>
-              <LogOutIcon aria-hidden />
-              <span>{logout.isPending ? "Logging out..." : "Log out"}</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
+        <SidebarFooter>
+          <div className="relative overflow-hidden rounded-xl bg-forest p-3 text-forest-foreground group-data-[collapsible=icon]:hidden">
+            <Leaf className="absolute -right-2 -bottom-3 size-14 rotate-12 text-forest-foreground/15" />
+            <p className="text-sm font-semibold">Harvest season?</p>
+            <p className="mt-0.5 text-xs text-forest-foreground/75">Book capacity early, chambers fill up fast.</p>
+          </div>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton tooltip="Log out" onClick={() => logout.mutate()} disabled={logout.isPending}>
+                <LogOutIcon aria-hidden />
+                <span>{logout.isPending ? "Logging out..." : "Log out"}</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+      </nav>
       <SidebarRail />
     </Sidebar>
   )

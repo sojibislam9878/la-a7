@@ -46,7 +46,7 @@ export function HowItWorks() {
                 <span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <step.icon className="size-5" aria-hidden />
                 </span>
-                <span className="text-4xl font-bold text-muted-foreground/25" aria-hidden>
+                <span className="text-4xl font-bold text-muted-foreground/80 dark:text-muted-foreground/60" aria-hidden>
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>

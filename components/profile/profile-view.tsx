@@ -72,12 +72,12 @@ function ProfileSummary({ user, facts }: { user: User; facts: ProfileFact[] }) {
       </div>
       <dl className="flex flex-col gap-3 border-t border-forest-foreground/10 pt-5">
         {all.map((fact) => (
-          <div key={fact.label} className="flex items-start gap-3">
-            <fact.icon className="mt-0.5 size-4 shrink-0 text-harvest" aria-hidden />
-            <div className="min-w-0">
-              <dt className="text-xs text-forest-foreground/60">{fact.label}</dt>
-              <dd className="truncate text-sm font-medium">{fact.value}</dd>
-            </div>
+          <div key={fact.label} className="relative min-w-0 pl-7">
+            <dt className="text-xs text-forest-foreground/60">
+              <fact.icon className="absolute top-[0.125rem] left-0 size-4 text-harvest" aria-hidden />
+              {fact.label}
+            </dt>
+            <dd className="truncate text-sm font-medium">{fact.value}</dd>
           </div>
         ))}
       </dl>

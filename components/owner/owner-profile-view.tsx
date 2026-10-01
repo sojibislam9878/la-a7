@@ -10,7 +10,11 @@ import { useOwnerProfile } from "@/hooks/use-profile"
 
 export function OwnerProfileView() {
   const owner = useOwnerProfile()
-  const business = owner.data === undefined ? "…" : (owner.data?.businessName ?? "Not set up yet")
+  const business = owner.isError
+    ? "Couldn't load"
+    : owner.data === undefined
+      ? "…"
+      : (owner.data?.businessName ?? "Not set up yet")
 
   return (
     <ProfileView

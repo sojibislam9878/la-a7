@@ -86,7 +86,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: SelfServiceRole }) 
         },
         onError: (error) => {
           if (error instanceof ApiError && error.status === 502) {
-            toast.warning("Account created, but the code could not be sent", {
+            toast.warning("Account created, but we couldn't send the code", {
               description: "Request a new code on the next page.",
             })
             router.push(verifyOtpUrl(email, { sent: "0" }))

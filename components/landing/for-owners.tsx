@@ -17,7 +17,7 @@ export function ForOwners() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 overflow-hidden rounded-3xl bg-primary px-6 py-12 text-primary-foreground sm:px-12 lg:grid-cols-2 lg:py-16">
           <div className="flex flex-col items-start gap-5">
-            <span className="text-sm font-semibold tracking-wide uppercase opacity-80">For warehouse owners</span>
+            <span className="text-sm font-semibold tracking-wide uppercase opacity-90">For warehouse owners</span>
             <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
               Fill your chambers before the season starts
             </h2>

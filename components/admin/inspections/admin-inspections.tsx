@@ -139,26 +139,26 @@ function InspectionCard({ inspection }: { inspection: Inspection }) {
       </div>
 
       <dl className="grid gap-2 sm:grid-cols-2">
-        <div className="flex items-start gap-2 rounded-xl bg-cream/60 px-3 py-2 dark:bg-muted/40">
-          <ScaleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-          <div className="min-w-0">
-            <dt className="text-xs text-muted-foreground">Weighed</dt>
-            <dd className="text-sm font-medium">
-              {formatNumber(inspection.actualQtyKg)} kg{" "}
-              <span className={cn("text-xs font-normal", diff.large ? "text-harvest-foreground dark:text-harvest" : "text-muted-foreground")}>
-                {diff.text}
-              </span>
-            </dd>
-          </div>
+        <div className="relative min-w-0 rounded-xl bg-cream/60 py-2 dark:bg-muted/40 pr-3 pl-9">
+          <dt className="text-xs text-muted-foreground">
+            <ScaleIcon className="absolute top-[0.625rem] left-3 size-4 text-primary" aria-hidden />
+            Weighed
+          </dt>
+          <dd className="text-sm font-medium">
+            {formatNumber(inspection.actualQtyKg)} kg{" "}
+            <span className={cn("text-xs font-normal", diff.large ? "text-harvest-foreground dark:text-harvest" : "text-muted-foreground")}>
+              {diff.text}
+            </span>
+          </dd>
         </div>
-        <div className="flex items-start gap-2 rounded-xl bg-cream/60 px-3 py-2 dark:bg-muted/40">
-          <DropletsIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-          <div className="min-w-0">
-            <dt className="text-xs text-muted-foreground">Moisture</dt>
-            <dd className="text-sm font-medium">
-              {inspection.moisturePct === null ? "Not measured" : `${inspection.moisturePct}%`}
-            </dd>
-          </div>
+        <div className="relative min-w-0 rounded-xl bg-cream/60 py-2 dark:bg-muted/40 pr-3 pl-9">
+          <dt className="text-xs text-muted-foreground">
+            <DropletsIcon className="absolute top-[0.625rem] left-3 size-4 text-primary" aria-hidden />
+            Moisture
+          </dt>
+          <dd className="text-sm font-medium">
+            {inspection.moisturePct === null ? "Not measured" : `${inspection.moisturePct}%`}
+          </dd>
         </div>
       </dl>
 

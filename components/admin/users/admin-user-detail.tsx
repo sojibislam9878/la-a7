@@ -64,12 +64,12 @@ export function AdminUserDetail({ id }: { id: string }) {
 
 function Row({ icon: Icon, label, children }: { icon: LucideIcon; label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3">
-      <Icon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-      <div className="min-w-0">
-        <dt className="text-xs text-muted-foreground">{label}</dt>
-        <dd className="text-sm font-medium break-words">{children}</dd>
-      </div>
+    <div className="relative min-w-0 pl-7">
+      <dt className="text-xs text-muted-foreground">
+        <Icon className="absolute top-[0.125rem] left-0 size-4 text-primary" aria-hidden />
+        {label}
+      </dt>
+      <dd className="text-sm font-medium break-words">{children}</dd>
     </div>
   )
 }
