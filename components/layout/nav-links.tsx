@@ -7,7 +7,6 @@ import { PUBLIC_NAV_LINKS } from "@/constants/navigation"
 import { cn } from "@/lib/utils"
 
 export function isNavLinkActive(pathname: string, href: string) {
-  if (href.includes("#")) return false
   if (href === "/") return pathname === "/"
   return pathname === href || pathname.startsWith(`${href}/`)
 }

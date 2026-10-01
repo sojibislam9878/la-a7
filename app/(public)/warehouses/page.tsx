@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
 
-import { Leaf } from "@/components/shared/leaf"
+import { PageHero } from "@/components/shared/page-hero"
 import { ActiveFilters } from "@/components/warehouse/active-filters"
 import { FilterPanel } from "@/components/warehouse/filter-panel"
 import { MobileFilters } from "@/components/warehouse/mobile-filters"
@@ -29,20 +29,11 @@ export default async function WarehousesPage({ searchParams }: PageProps) {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-soil/10 bg-cream bg-grain">
-        <Leaf className="absolute top-6 right-[8%] size-20 rotate-12 text-primary/15" />
-        <Leaf className="absolute -bottom-4 left-[45%] size-16 -rotate-[30deg] text-harvest/30" />
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-3 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <p className="text-sm font-semibold tracking-wide text-primary uppercase">Find storage</p>
-          <h1 className="font-display text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-            Cold storage for every harvest
-          </h1>
-          <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
-            Every warehouse here is verified and approved. Filter by where you farm, what you grow and how much
-            space you need.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Find storage"
+        title="Cold storage for every harvest"
+        description="Every warehouse here is verified and approved. Filter by where you farm, what you grow and how much space you need."
+      />
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[17rem_minmax(0,1fr)] lg:px-8 lg:py-10">
         <aside className="hidden lg:block">

@@ -9,9 +9,9 @@ const FOOTER_SECTIONS = [
     title: "Platform",
     links: [
       { label: "Find storage", href: "/warehouses" },
-      { label: "How it works", href: "/#how-it-works" },
-      { label: "Crop guide", href: "/#crops" },
-      { label: "FAQ", href: "/#faq" },
+      { label: "How it works", href: "/how-it-works" },
+      { label: "Crop guide", href: "/crop-guide" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
   {
@@ -26,7 +26,7 @@ const FOOTER_SECTIONS = [
     title: "For owners",
     links: [
       { label: "List your warehouse", href: "/register?role=WAREHOUSE_OWNER" },
-      { label: "Why list with us", href: "/#for-owners" },
+      { label: "Why list with us", href: "/for-owners" },
       { label: "Owner dashboard", href: "/owner" },
     ],
   },

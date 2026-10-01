@@ -3,11 +3,12 @@ import { ArrowLeftIcon, SearchIcon } from "lucide-react"
 
 import { Leaf } from "@/components/shared/leaf"
 import { Logo } from "@/components/shared/logo"
+import { MAIN_CONTENT_ID } from "@/components/shared/skip-link"
 import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
   return (
-    <main className="relative flex min-h-svh flex-col items-center justify-center gap-8 overflow-hidden bg-cream bg-grain px-4 text-center">
+    <main id={MAIN_CONTENT_ID} tabIndex={-1} className="relative flex min-h-svh flex-col items-center justify-center gap-8 overflow-hidden bg-cream bg-grain px-4 text-center outline-none">
       <Leaf className="absolute top-16 left-[12%] size-20 -rotate-12 text-primary/20" />
       <Leaf className="absolute right-[10%] bottom-20 size-24 rotate-[150deg] text-harvest/40" />
       <Logo />
